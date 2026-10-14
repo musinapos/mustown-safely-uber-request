@@ -6,278 +6,94 @@
 <title>Mustown Uber Request</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0f172a">
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
-  body{background:#f1f5f9;color:#0f172a;overflow-x:hidden}
-  button{cursor:pointer;border:none}
-
-  /* ===== PAGE 1 WELCOME ===== */
-  #welcomePage{min-height:100vh;background:#0f172a;color:white;display:flex;flex-direction:column}
-  .topBar{padding:16px 20px;display:flex;justify-content:space-between;align-items:center;background:#0f172a;position:sticky;top:0;z-index:10}
-  .logo{font-size:22px;font-weight:800;letter-spacing:-0.5px;line-height:1}
-  .logo span{color:#38bdf8;font-size:12px;letter-spacing:2px;display:block;font-weight:600;margin-top:3px}
-  .downloadBtn{background:#38bdf8;color:#0f172a;padding:10px 16px;border-radius:999px;font-weight:700;font-size:13px;box-shadow:0 4px 15px rgba(56,189,248,.35)}
-  .hero{padding:32px 20px 20px;text-align:center;background:linear-gradient(180deg,#0f172a 0%,#1e293b 100%)}
-  .hero h1{font-size:42px;line-height:0.95;letter-spacing:-1.5px}
-  .hero h1 em{font-style:normal;color:#38bdf8}
-  .hero p{margin:14px auto 0;color:#cbd5e1;font-size:15px;line-height:1.5;max-width:420px}
-  .heroImg{margin:22px auto 0;width:100%;max-width:520px;height:210px;border-radius:20px;overflow:hidden;position:relative;box-shadow:0 20px 40px rgba(0,0,0,.35)}
-  .heroImg img{width:100%;height:100%;object-fit:cover}
-  .heroImg:after{content:"MUSTOWN • PRETORIA";position:absolute;bottom:10px;left:10px;background:rgba(15,23,42,.85);padding:6px 10px;border-radius:999px;font-size:11px;letter-spacing:1px;font-weight:700}
-  .roles{padding:22px 18px 30px;background:#f1f5f9;flex:1}
-  .roles h2{color:#0f172a;font-size:18px;margin-bottom:12px;text-align:center}
-  .roleCard{background:white;border-radius:16px;padding:16px;display:flex;align-items:center;gap:14px;margin-bottom:12px;box-shadow:0 4px 14px rgba(0,0,0,.06);cursor:pointer;text-align:left;width:100%}
-  .roleIcon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
-  .roleCard b{font-size:16px;display:block}
-  .roleCard small{color:#64748b;font-size:13px;line-height:1.3;display:block;margin-top:2px}
-  .arrow{margin-left:auto;font-size:20px;color:#94a3b8}
-  .c1{background:#e0f2fe}.c2{background:#dcfce7}.c3{background:#ede9fe}
-  .footer{padding:16px;text-align:center;color:#94a3b8;font-size:12px}
-
-  /* ===== PAGE 2 APP ===== */
-  #appPage{display:none;min-height:100vh;background:#f8fafc;padding-bottom:90px}
-  .appHeader{background:#0f172a;color:white;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
-  .appHeader b{font-size:17px}.appHeader span{font-size:12px;color:#38bdf8}
-  .backBtn{background:rgba(255,255,255,.15);color:white;padding:8px 12px;border-radius:999px;font-size:13px}
-  .container{padding:16px;max-width:600px;margin:0 auto}
-  .card{background:white;border-radius:16px;padding:18px;box-shadow:0 2px 10px rgba(0,0,0,.05);margin-bottom:14px}
-  .card h3{font-size:15px;margin-bottom:12px}
-  label{font-size:13px;font-weight:600;color:#334155;display:block;margin-bottom:6px}
-  input,select,textarea{width:100%;padding:13px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:15px;outline:none;margin-bottom:12px;background:white}
-  input:focus,select:focus{border-color:#38bdf8}
-  .mainBtn{width:100%;padding:15px;background:#0f172a;color:white;border-radius:12px;font-weight:700;font-size:15px}
-  .mainBtn.blue{background:#0284c7}
-  .reqItem{border:1px solid #e2e8f0;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff}
-  .reqItem b{font-size:14px}
-  .reqItem p{font-size:13px;color:#475569;margin:4px 0}
-  .badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:700}
-  .badge.pending{background:#fef9c3;color:#854d0e}.badge.accepted{background:#dcfce7;color:#166534}.badge.done{background:#e0e7ff;color:#3730a3}
-  .smallBtn{padding:8px 12px;border-radius:8px;font-size:13px;font-weight:600;background:#f1f5f9;color:#0f172a;margin-right:6px;margin-top:6px}
-  .smallBtn.green{background:#16a34a;color:white}.smallBtn.red{background:#ef4444;color:white}
-  .hidden{display:none}
-  .pinBox{text-align:center;padding:40px 20px}
-  .pinBox input{text-align:center;font-size:22px;letter-spacing:8px}
-  #installBanner{display:none;background:#38bdf8;color:#0f172a;padding:12px 16px;text-align:center;font-size:13px;font-weight:600}
+  body { margin:0; font-family:Arial,sans-serif; background:#f1f5f9; text-align:center; }
+  .top { background:#0f172a; padding:30px 20px 25px; color:white; border-bottom-left-radius:25px; border-bottom-right-radius:25px; }
+  .top img { width:120px; height:120px; border-radius:26px; box-shadow:0 10px 25px rgba(0,0,0,0.4); background:white; }
+  .top h1 { margin:15px 0 0; font-size:32px; }
+  .top p { letter-spacing:5px; font-size:13px; opacity:0.8; margin-top:5px; }
+  .box { background:white; margin:20px; padding:20px; border-radius:18px; box-shadow:0 5px 15px rgba(0,0,0,0.1); text-align:left; }
+  label { font-weight:bold; font-size:14px; }
+  input, select, textarea { width:100%; padding:12px; margin:8px 0 15px; border:1px solid #cbd5e1; border-radius:10px; font-size:15px; box-sizing:border-box; }
+  button { width:100%; padding:15px; background:#0f172a; color:white; border:none; border-radius:12px; font-size:18px; font-weight:bold; cursor:pointer; }
+  button:hover { background:#1e293b; }
+  .install { margin:20px; }
+  .install button { background:#2563eb; }
 </style>
 </head>
 <body>
 
-<!-- ============ PAGE 1 ============ -->
-<div id="welcomePage">
-  <div class="topBar">
-    <div class="logo">MUSTOWN<span>UBER REQUEST</span></div>
-    <button class="downloadBtn" onclick="downloadApp()">⬇ Download App</button>
-  </div>
-  <div id="installBanner">📱 Tap Share -> Add to Home Screen to install Mustown</div>
-  <div class="hero">
-    <h1>MUSTOWN<br><em>UBER REQUEST</em></h1>
-    <p>Fast, safe and affordable rides around Mustown. Book in 30 seconds. Track your driver live.</p>
-    <div class="heroImg">
-      <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=900&q=80" alt="Car">
-    </div>
-  </div>
-  <div class="roles">
-    <h2>Choose who you are</h2>
-    <button class="roleCard" onclick="openRole('customer')">
-      <div class="roleIcon c1">🚕</div>
-      <div><b>I'm a Customer</b><small>Book a ride now, pick your location</small></div><span class="arrow">›</span>
-    </button>
-    <button class="roleCard" onclick="openRole('driver')">
-      <div class="roleIcon c2">🚗</div>
-      <div><b>I'm a Driver</b><small>Go online, see jobs and accept</small></div><span class="arrow">›</span>
-    </button>
-    <button class="roleCard" onclick="openRole('admin')">
-      <div class="roleIcon c3">🔐</div>
-      <div><b>Admin Only</b><small>Manage drivers, money and requests</small></div><span class="arrow">›</span>
-    </button>
-    <p style="text-align:center;color:#64748b;font-size:12px;margin-top:12px">Made for Pretoria • Safe • Trusted • Mustown Community</p>
-  </div>
-  <div class="footer">© 2026 Mustown Uber Request</div>
+<!-- TOP LOGO -->
+<div class="top">
+  <img src="logo.png" alt="Mustown Uber Request">
+  <h1>Mustown</h1>
+  <p>UBER REQUEST</p>
 </div>
 
-<!-- ============ PAGE 2 ============ -->
-<div id="appPage">
-  <div class="appHeader">
-    <div><b>Mustown Uber Request</b><br><span id="roleLabel">Customer</span></div>
-    <button class="backBtn" onclick="goHome()">← Home</button>
-  </div>
-  <div class="container">
+<!-- REQUEST FORM -->
+<div class="box">
+  <h2 style="text-align:center; margin-top:0;">Request a Ride</h2>
+  <label>Your Name</label>
+  <input type="text" id="name" placeholder="e.g. Musina">
 
-    <!-- CUSTOMER -->
-    <div id="customerSection">
-      <div class="card">
-        <h3>🚕 Book a Ride</h3>
-        <label>Your Name</label><input id="custName" placeholder="e.g. Thabo">
-        <label>Your Phone / WhatsApp</label><input id="custPhone" placeholder="072 123 4567">
-        <label>Pickup Location</label><input id="pickup" placeholder="e.g. Mustown Shop">
-        <label>Drop-off Location</label><input id="dropoff" placeholder="e.g. Pretoria CBD">
-        <label>Notes (optional)</label><input id="notes" placeholder="2 people, bags...">
-        <button class="mainBtn blue" onclick="requestRide()">Request Ride Now →</button>
-        <p id="custMsg" style="font-size:13px;color:#16a34a;margin-top:10px"></p>
-      </div>
-      <div class="card"><h3>Your Requests</h3><div id="custRequests">Loading...</div></div>
-    </div>
+  <label>Phone Number</label>
+  <input type="tel" id="phone" placeholder="e.g. 078 123 4567">
 
-    <!-- DRIVER -->
-    <div id="driverSection" class="hidden">
-      <div class="card">
-        <h3>🚗 Driver Login</h3>
-        <label>Select Your Name</label><select id="driverSelect"><option>Loading drivers...</option></select>
-        <button class="mainBtn" onclick="goOnline()">Go Online</button>
-        <p id="driverStatus" style="font-size:13px;margin-top:8px;color:#64748b"></p>
-      </div>
-      <div class="card"><h3>Available Requests</h3><div id="driverRequests">Go online to see jobs</div></div>
-    </div>
+  <label>Pickup Location</label>
+  <input type="text" id="pickup" placeholder="e.g. Mustown, Pretoria">
 
-    <!-- ADMIN -->
-    <div id="adminSection" class="hidden">
-      <div id="adminLogin" class="card pinBox">
-        <h3>🔐 Admin Only</h3><p style="color:#64748b;font-size:13px;margin:6px 0 14px">Enter Admin PIN</p>
-        <input id="adminPin" type="password" inputmode="numeric" maxlength="5" placeholder="•••••">
-        <button class="mainBtn" onclick="checkAdmin()">Unlock Admin</button>
-        <p id="adminErr" style="color:#ef4444;font-size:13px;margin-top:8px"></p>
-      </div>
-      <div id="adminPanel" class="hidden">
-        <div class="card"><h3>📊 All Requests</h3><div id="adminRequests">Loading...</div></div>
-        <div class="card"><h3>👥 Drivers (from Firebase)</h3><div id="adminDrivers">Loading...</div>
-        <p style="font-size:12px;color:#64748b;margin-top:8px">Add a new driver in Firebase Firestore > drivers > Add Document. No need to edit HTML.</p>
-        </div>
-      </div>
-    </div>
+  <label>Destination</label>
+  <input type="text" id="destination" placeholder="e.g. Pretoria CBD">
 
-  </div>
+  <label>Number of Passengers</label>
+  <select id="passengers">
+    <option>1 Passenger</option>
+    <option>2 Passengers</option>
+    <option>3 Passengers</option>
+    <option>4 Passengers</option>
+    <option>5 Passengers</option>
+    <option>6 Passengers</option>
+    <option>7 Passengers</option>
+  </select>
+
+  <label>Notes</label>
+  <textarea id="notes" rows="2" placeholder="Any extra info..."></textarea>
+
+  <button onclick="sendRequest()">Request Uber Now</button>
+</div>
+
+<div class="install">
+  <button onclick="installApp()">⬇ Download App</button>
 </div>
 
 <script>
-  // ========== FIREBASE CONFIG - PASTE YOURS HERE ==========
-  const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "mtown-07790.firebaseapp.com",
-    projectId: "mtown-07790",
-    storageBucket: "mtown-07790.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
-  };
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-
-  const ADMIN_PIN = "92945";
-  let currentRole = 'customer';
-  let myDriverName = '';
-
-  function openRole(role){
-    currentRole = role;
-    document.getElementById('welcomePage').style.display='none';
-    document.getElementById('appPage').style.display='block';
-    document.getElementById('customerSection').classList.add('hidden');
-    document.getElementById('driverSection').classList.add('hidden');
-    document.getElementById('adminSection').classList.add('hidden');
-    if(role==='customer'){
-      document.getElementById('customerSection').classList.remove('hidden');
-      document.getElementById('roleLabel').innerText='Customer';
-    } else if(role==='driver'){
-      document.getElementById('driverSection').classList.remove('hidden');
-      document.getElementById('roleLabel').innerText='Driver';
-      loadDrivers();
-    } else {
-      document.getElementById('adminSection').classList.remove('hidden');
-      document.getElementById('roleLabel').innerText='Admin';
-    }
-    window.scrollTo(0,0);
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+});
+function installApp(){
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+  } else {
+    alert("To install: Tap Share > Add to Home Screen");
   }
-  function goHome(){
-    document.getElementById('appPage').style.display='none';
-    document.getElementById('welcomePage').style.display='flex';
+}
+function sendRequest(){
+  const name = document.getElementById('name').value;
+  const phone = document.getElementById('phone').value;
+  const pickup = document.getElementById('pickup').value;
+  const destination = document.getElementById('destination').value;
+  const passengers = document.getElementById('passengers').value;
+  const notes = document.getElementById('notes').value;
+  if(!name || !pickup || !destination){
+    alert("Please fill name, pickup and destination");
+    return;
   }
-
-  // Customer
-  async function requestRide(){
-    const name=document.getElementById('custName').value.trim();
-    const phone=document.getElementById('custPhone').value.trim();
-    const pickup=document.getElementById('pickup').value.trim();
-    const dropoff=document.getElementById('dropoff').value.trim();
-    const notes=document.getElementById('notes').value.trim();
-    if(!name||!phone||!pickup||!dropoff){alert('Please fill all fields');return}
-    await db.collection('requests').add({name,phone,pickup,dropoff,notes,status:'pending',createdAt:firebase.firestore.FieldValue.serverTimestamp()});
-    document.getElementById('custMsg').innerText='✅ Request sent! Waiting for driver...';
-    document.getElementById('pickup').value='';document.getElementById('dropoff').value='';
-  }
-
-  // Driver
-  async function loadDrivers(){
-    const snap=await db.collection('drivers').get();
-    const sel=document.getElementById('driverSelect');
-    sel.innerHTML='';
-    if(snap.empty){sel.innerHTML='<option>No drivers in Firebase</option>';return}
-    snap.forEach(d=>{let o=document.createElement('option');o.value=d.data().name;o.textContent=d.data().name+' - '+(d.data().car||'');sel.appendChild(o)});
-    const dsel=document.getElementById('adminDrivers'); // preload admin view too
-  }
-  async function goOnline(){
-    myDriverName=document.getElementById('driverSelect').value;
-    document.getElementById('driverStatus').innerText='🟢 You are ONLINE as '+myDriverName;
-    listenDriverRequests();
-  }
-  function listenDriverRequests(){
-    db.collection('requests').where('status','==','pending').orderBy('createdAt','desc').onSnapshot(snap=>{
-      let html='';
-      snap.forEach(doc=>{
-        let d=doc.data();
-        html+=`<div class="reqItem"><b>${d.pickup} → ${d.dropoff}</b><p>Customer: ${d.name} - ${d.phone}</p><p>${d.notes||''}</p><button class="smallBtn green" onclick="acceptJob('${doc.id}')">Accept</button></div>`;
-      });
-      document.getElementById('driverRequests').innerHTML=html||'No jobs right now';
-    });
-  }
-  async function acceptJob(id){
-    await db.collection('requests').doc(id).update({status:'accepted',driver:myDriverName});
-    alert('Accepted! Call customer now');
-  }
-
-  // Admin
-  function checkAdmin(){
-    const pin=document.getElementById('adminPin').value;
-    if(pin===ADMIN_PIN){
-      document.getElementById('adminLogin').classList.add('hidden');
-      document.getElementById('adminPanel').classList.remove('hidden');
-      listenAdmin();
-    } else {
-      document.getElementById('adminErr').innerText='Wrong PIN, Access Denied';
-    }
-  }
-  function listenAdmin(){
-    db.collection('requests').orderBy('createdAt','desc').limit(20).onSnapshot(snap=>{
-      let html='';
-      snap.forEach(doc=>{
-        let d=doc.data();
-        html+=`<div class="reqItem"><b>${d.pickup} → ${d.dropoff}</b><p>${d.name} (${d.phone}) - Driver: ${d.driver||'Not assigned'}</p><span class="badge ${d.status}">${d.status}</span></div>`;
-      });
-      document.getElementById('adminRequests').innerHTML=html||'No requests';
-    });
-    db.collection('drivers').onSnapshot(snap=>{
-      let html='';
-      snap.forEach(doc=>{let d=doc.data();html+=`<div class="reqItem"><b>${d.name}</b><p>${d.car||''} - ${d.phone||''}</p></div>`});
-      document.getElementById('adminDrivers').innerHTML=html||'No drivers';
-    });
-  }
-
-  // Customer live list
-  db.collection('requests').orderBy('createdAt','desc').limit(10).onSnapshot(snap=>{
-    let html='';
-    snap.forEach(doc=>{
-      let d=doc.data();
-      html+=`<div class="reqItem"><b>${d.pickup} → ${d.dropoff}</b><p>${d.name} - Driver: ${d.driver||'Waiting...'}</p><span class="badge ${d.status}">${d.status}</span></div>`;
-    });
-    document.getElementById('custRequests').innerHTML=html||'No requests yet';
-  });
-
-  // Download / Install
-  let deferredPrompt;
-  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('installBanner').style.display='block'});
-  function downloadApp(){
-    if(deferredPrompt){deferredPrompt.prompt()}
-    else {document.getElementById('installBanner').style.display='block';alert('On iPhone: Tap Share -> Add to Home Screen. On Android: Tap Menu -> Add to Home Screen / Install App');}
-  }
+  const msg = `Hello Mustown Uber%0A%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*From:* ${pickup}%0A*To:* ${destination}%0A*Passengers:* ${passengers}%0A*Notes:* ${notes}`;
+  window.open(`https://wa.me/27600000000?text=${msg}`, '_blank');
+}
 </script>
+
 </body>
 </html>
