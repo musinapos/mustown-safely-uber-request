@@ -4,141 +4,79 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mustown Uber Request</title>
-<link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0f172a">
 <style>
   body { margin:0; font-family:Arial,sans-serif; background:#f1f5f9; text-align:center; }
-  .top { background:#0f172a; padding:30px 20px 25px; color:white; border-bottom-left-radius:25px; border-bottom-right-radius:25px; }
-  .top img { width:120px; height:120px; border-radius:26px; box-shadow:0 10px 25px rgba(0,0,0,0.4); background:white; }
-  .top h1 { margin:15px 0 0; font-size:32px; }
-  .top p { letter-spacing:5px; font-size:13px; opacity:0.8; margin-top:5px; }
+  .top { background:#0f172a; padding:20px 20px 15px; color:white; border-bottom-left-radius:25px; border-bottom-right-radius:25px; }
+  .top img { width:90px; height:90px; border-radius:22px; background:white; }
+  .top h1 { margin:10px 0 0; font-size:28px; }
+  .top p { letter-spacing:5px; font-size:12px; opacity:0.8; }
   .box { background:white; margin:20px; padding:20px; border-radius:18px; box-shadow:0 5px 15px rgba(0,0,0,0.1); text-align:left; }
   label { font-weight:bold; font-size:14px; }
   input, select, textarea { width:100%; padding:12px; margin:8px 0 15px; border:1px solid #cbd5e1; border-radius:10px; font-size:15px; box-sizing:border-box; }
   button { width:100%; padding:15px; background:#0f172a; color:white; border:none; border-radius:12px; font-size:18px; font-weight:bold; cursor:pointer; }
-  
-  /* CATEGORY TABS - NOW VISIBLE */
+  .request-btn { background:#16a34a !important; font-size:19px; animation: moveUpDown 1.2s ease-in-out infinite; box-shadow: 0 8px 20px rgba(22,163,74,0.5); }
+  @keyframes moveUpDown { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
   .tabs { display:flex; gap:10px; margin:15px 20px 0; }
-  .tab-btn { flex:1; padding:14px 5px; font-size:16px; background:#e2e8f0; color:#0f172a; border-radius:12px; border:2px solid transparent; }
-  .tab-btn.active { background:#0f172a; color:white; border-color:#16a34a; }
+  .tab-btn { flex:1; padding:14px 5px; font-size:16px; background:#e2e8f0; color:#0f172a; border-radius:12px; }
+  .tab-btn.active { background:#0f172a; color:white; }
   .tab-content { display:none; }
   .tab-content.active { display:block; }
-
-  .request-btn { background:#16a34a !important; font-size:19px; animation: moveUpDown 1.2s ease-in-out infinite; box-shadow: 0 8px 20px rgba(22,163,74,0.5); }
-  @keyframes moveUpDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-  .install { margin:20px; } .install button { background:#2563eb; }
   .driver-card { display:flex; align-items:center; gap:12px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:12px; margin-top:12px; }
   .driver-card img { width:60px; height:60px; border-radius:50%; object-fit:cover; background:#cbd5e1; }
-  .driver-card h3 { margin:0; font-size:16px; } .driver-card p { margin:2px 0; font-size:13px; color:#475569; }
+  .driver-card h3 { margin:0; font-size:16px; }
+  .driver-card p { margin:2px 0; font-size:13px; color:#475569; }
   .live-dot { color:#16a34a; font-weight:bold; }
   .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:999; justify-content:center; align-items:center; padding:20px; }
   .modal-content { background:white; width:100%; max-width:420px; border-radius:20px; padding:25px; text-align:left; }
   .price-row { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #e2e8f0; font-size:15px; }
-  .total { font-size:22px; font-weight:bold; color:#0f172a; }
-  .close-btn { background:#ef4444; margin-top:10px; } .confirm-btn { background:#16a34a; margin-top:15px; }
+  .total { font-size:22px; font-weight:bold; }
+  .close-btn { background:#ef4444; margin-top:10px; }
+  .confirm-btn { background:#16a34a; margin-top:15px; }
 </style>
 </head>
 <body>
 
-<div class="top">
-  <img src="logo.png" alt="Mustown Uber Request">
-  <h1>Mustown</h1>
-  <p>UBER REQUEST</p>
-</div>
+<div class="top"><img src="logo.png"><h1>Mustown</h1><p>UBER REQUEST</p></div>
 
-<!-- ADMIN / DRIVER / CUSTOMER CATEGORIES - TOP -->
 <div class="tabs">
   <button class="tab-btn active" onclick="showTab('customer', this)">👤 Customer</button>
   <button class="tab-btn" onclick="showTab('driver', this)">🚗 Driver</button>
   <button class="tab-btn" onclick="showTab('admin', this)">🛠 Admin</button>
 </div>
 
-<!-- CUSTOMER TAB -->
 <div id="customer" class="tab-content active">
   <div class="box">
-    <h2 style="text-align:center; margin:0;">Our Drivers <span class="live-dot">● LIVE</span></h2>
-    <p style="text-align:center; font-size:13px; color:#64748b;">Updated automatically from Firebase</p>
-    <div id="driversList"><p style="text-align:center;">Loading drivers...</p></div>
-  </div>
-  <div class="box">
-    <h2 style="text-align:center; margin-top:0;">Request a Ride</h2>
+    <h2 style="text-align:center; margin-top:0;">🚕 Request a Ride</h2>
     <label>Your Name</label><input type="text" id="name" placeholder="e.g. Musina">
     <label>Phone Number</label><input type="tel" id="phone" placeholder="e.g. 078 123 4567">
     <label>Pickup Location</label><input type="text" id="pickup" placeholder="e.g. Mustown, Pretoria">
     <label>Destination</label><input type="text" id="destination" placeholder="e.g. Pretoria CBD">
-    <label>Number of Passengers</label><select id="passengers"><option>1 Passenger</option><option>2 Passengers</option><option>3 Passengers</option><option>4 Passengers</option><option>5 Passengers</option><option>6 Passengers</option><option>7 Passengers</option></select>
-    <label>Notes</label><textarea id="notes" rows="2" placeholder="Any extra info..."></textarea>
+    <label>Passengers</label><select id="passengers"><option>1 Passenger</option><option>2 Passengers</option><option>3 Passengers</option><option>4 Passengers</option><option>5 Passengers</option><option>6 Passengers</option><option>7 Passengers</option></select>
+    <label>Notes</label><textarea id="notes" rows="2"></textarea>
     <button class="request-btn" onclick="showQuote()">🚕 Request Uber Now</button>
   </div>
-</div>
 
-<!-- DRIVER TAB -->
-<div id="driver" class="tab-content">
   <div class="box">
-    <h2 style="text-align:center;">🚗 Driver Login</h2>
-    <p style="text-align:center; color:#64748b; font-size:14px;">Drivers: Davis, Jason and others - see your requests here</p>
-    <label>Driver Name</label><input type="text" id="driverName" placeholder="e.g. Davis">
-    <label>Driver Phone</label><input type="tel" id="driverPhone" placeholder="e.g. 078 ...">
-    <button onclick="alert('Driver logged in: ' + document.getElementById('driverName').value + '. Requests will come on WhatsApp.')">Login as Driver</button>
-    <div id="driversList2" style="margin-top:15px;"></div>
+    <h2 style="text-align:center; margin:0;">Our Drivers <span class="live-dot">● LIVE</span></h2>
+    <p style="text-align:center; font-size:13px; color:#64748b;">Updated automatically from Firebase</p>
+    <div id="driversList"><p style="text-align:center;">Loading drivers...</p></div>
+    <p id="debug" style="text-align:center; font-size:11px; color:red;"></p>
   </div>
 </div>
 
-<!-- ADMIN TAB -->
-<div id="admin" class="tab-content">
-  <div class="box">
-    <h2 style="text-align:center;">🛠 Admin Panel</h2>
-    <p style="text-align:center; color:#64748b; font-size:14px;">Manage drivers, prices and requests</p>
-    <label>Admin Password</label><input type="password" id="adminPass" placeholder="Enter admin password">
-    <button onclick="adminLogin()">Enter Admin Panel</button>
-    <div id="adminArea" style="display:none; margin-top:15px;">
-      <p>✅ Welcome Admin!</p>
-      <button onclick="alert('Open Firebase to add drivers: console.firebase.google.com')">+ Add Driver in Firebase</button>
-      <p style="font-size:13px; margin-top:10px;">Drivers are added in Firebase > Firestore > drivers. They appear automatically.</p>
-    </div>
-  </div>
-</div>
+<div id="driver" class="tab-content"><div class="box"><h2 style="text-align:center;">🚗 Driver Login</h2><label>Driver Name</label><input type="text" id="driverName" placeholder="e.g. John"><label>Driver Phone</label><input type="tel" id="driverPhone" placeholder="0725660255"><button onclick="alert('Logged in as ' + document.getElementById('driverName').value)">Login as Driver</button></div></div>
+<div id="admin" class="tab-content"><div class="box"><h2 style="text-align:center;">🛠 Admin Panel</h2><label>Admin Password</label><input type="password" id="adminPass"><button onclick="document.getElementById('adminArea').style.display='block'; alert('Welcome Admin!')">Enter Admin Panel</button><div id="adminArea" style="display:none; margin-top:15px;"><p>✅ Welcome Admin! Drivers are added in Firebase > Firestore > drivers.</p></div></div></div>
 
-<div class="install"><button onclick="installApp()">⬇ Download App</button></div>
-
-<div id="quoteModal" class="modal"><div class="modal-content"><h2 style="text-align:center; margin-top:0;">🧾 Your Quote</h2><div id="quoteDetails"></div><div class="price-row total"><span>TOTAL:</span><span id="quoteTotal">R0</span></div><button class="confirm-btn" onclick="confirmRequest()">✅ Confirm & Send on WhatsApp</button><button class="close-btn" onclick="closeQuote()">Cancel</button></div></div>
+<div id="quoteModal" class="modal"><div class="modal-content"><h2 style="text-align:center;">🧾 Your Quote</h2><div id="quoteDetails"></div><div class="price-row total"><span>TOTAL:</span><span id="quoteTotal">R0</span></div><button class="confirm-btn" onclick="confirmRequest()">✅ Confirm & Send on WhatsApp</button><button class="close-btn" onclick="closeQuote()">Cancel</button></div></div>
 
 <script>
-function showTab(id, btn){
-  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-}
-function adminLogin(){
-  const p = document.getElementById('adminPass').value;
-  if(p === "1234" || p === "admin" || p !== ""){ document.getElementById('adminArea').style.display='block'; alert('Welcome Admin!'); }
-  else { alert('Enter password'); }
-}
-let deferredPrompt; let currentQuote = 0;
-window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; });
-function installApp(){ if(deferredPrompt){ deferredPrompt.prompt(); } else { alert("To install: Tap Share > Add to Home Screen"); } }
-function estimateDistance(pickup, destination){
-  const d = destination.toLowerCase();
-  if(d.includes("cbd")) return 18; if(d.includes("mall") || d.includes("menlyn")) return 22; if(d.includes("hospital")) return 12; if(d.includes("airport")) return 45; if(d.includes("centurion")) return 28; if(d.includes("soshanguve")) return 25; if(d.includes("mamelodi")) return 20; return 10;
-}
-function showQuote(){
-  const name = document.getElementById('name').value.trim();
-  const pickup = document.getElementById('pickup').value.trim();
-  const destination = document.getElementById('destination').value.trim();
-  if(!name || !pickup || !destination){ alert("Please fill name, pickup and destination"); return; }
-  const distance = estimateDistance(pickup, destination);
-  const baseFare = 25; const ratePerKm = 12; const distanceCost = distance * ratePerKm; const total = baseFare + distanceCost; currentQuote = total;
-  document.getElementById('quoteDetails').innerHTML = `<div class="price-row"><span>👤 Name:</span><b>${name}</b></div><div class="price-row"><span>📍 From:</span><b>${pickup}</b></div><div class="price-row"><span>🎯 To:</span><b>${destination}</b></div><div class="price-row"><span>Base Fare:</span><span>R${baseFare}</span></div><div class="price-row"><span>Distance (${distance} km x R${ratePerKm}):</span><span>R${distanceCost}</span></div>`;
-  document.getElementById('quoteTotal').innerText = "R" + total;
-  document.getElementById('quoteModal').style.display = "flex";
-}
-function closeQuote(){ document.getElementById('quoteModal').style.display = "none"; }
-function confirmRequest(){
-  const name = document.getElementById('name').value; const phone = document.getElementById('phone').value; const pickup = document.getElementById('pickup').value; const destination = document.getElementById('destination').value; const passengers = document.getElementById('passengers').value; const notes = document.getElementById('notes').value;
-  const msg = `Hello Mustown Uber%0A%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*From:* ${pickup}%0A*To:* ${destination}%0A*Passengers:* ${passengers}%0A*Notes:* ${notes}%0A%0A*QUOTED PRICE: R${currentQuote}*`;
-  window.open(`https://wa.me/27600000000?text=${msg}`, '_blank'); closeQuote();
-}
+function showTab(id, btn){ document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active')); document.getElementById(id).classList.add('active'); document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
+let currentQuote = 0;
+function estimateDistance(pickup, destination){ const d = destination.toLowerCase(); if(d.includes("cbd")) return 18; if(d.includes("mall")||d.includes("menlyn")) return 22; if(d.includes("hospital")) return 12; if(d.includes("airport")) return 45; if(d.includes("centurion")) return 28; if(d.includes("soshanguve")) return 25; if(d.includes("mamelodi")) return 20; return 10; }
+function showQuote(){ const name=document.getElementById('name').value.trim(); const pickup=document.getElementById('pickup').value.trim(); const destination=document.getElementById('destination').value.trim(); if(!name||!pickup||!destination){alert("Fill name, pickup and destination");return;} const distance=estimateDistance(pickup,destination); const total=25+(distance*12); currentQuote=total; document.getElementById('quoteDetails').innerHTML=`<div class="price-row"><span>👤 Name:</span><b>${name}</b></div><div class="price-row"><span>📍 From:</span><b>${pickup}</b></div><div class="price-row"><span>🎯 To:</span><b>${destination}</b></div><div class="price-row"><span>Base:</span><span>R25</span></div><div class="price-row"><span>Distance (${distance}km):</span><span>R${distance*12}</span></div>`; document.getElementById('quoteTotal').innerText="R"+total; document.getElementById('quoteModal').style.display="flex"; }
+function closeQuote(){ document.getElementById('quoteModal').style.display="none"; }
+function confirmRequest(){ const name=document.getElementById('name').value; const phone=document.getElementById('phone').value; const pickup=document.getElementById('pickup').value; const destination=document.getElementById('destination').value; const passengers=document.getElementById('passengers').value; const notes=document.getElementById('notes').value; const msg=`Hello Mustown Uber%0A%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*From:* ${pickup}%0A*To:* ${destination}%0A*Passengers:* ${passengers}%0A*Notes:* ${notes}%0A%0A*QUOTED PRICE: R${currentQuote}*`; window.open(`https://wa.me/27600000000?text=${msg}`,'_blank'); closeQuote(); }
 </script>
 
 <script type="module">
@@ -156,15 +94,20 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 onSnapshot(collection(db, "drivers"), (snapshot) => {
+  console.log("Drivers found:", snapshot.size);
+  document.getElementById("debug").innerText = "Found: " + snapshot.size + " drivers";
   let html = "";
-  if(snapshot.empty){ html = "<p style='text-align:center;'>No drivers online yet.</p>"; }
+  if(snapshot.empty){ html = "<p style='text-align:center;'>No drivers online yet. Check Firestore collection name is 'drivers'</p>"; }
   snapshot.forEach((doc) => {
     const d = doc.data();
-    html += `<div class="driver-card"><img src="${d.photo || 'logo.png'}" alt="Driver"><div><h3>🚗 ${d.name || 'Driver'}</h3><p>📞 ${d.phone || ''}</p><p>Car: ${d.car || 'Toyota Rumion'} | Plate: ${d.plate || ''}</p><p>Status: ${d.status || 'Available'}</p></div></div>`;
+    html += `<div class="driver-card"><img src="${d.photo || 'logo.png'}"><div><h3>🚗 ${d.name || 'Driver'}</h3><p>📞 ${d.phone || d.Phone || ''}</p><p>Role: ${d.role || 'Driver'} | Car: ${d.car || ''}</p><p>Status: ${d.status || 'Available'}</p></div></div>`;
   });
   document.getElementById("driversList").innerHTML = html;
+}, (error) => {
+  console.error(error);
+  document.getElementById("debug").innerText = "ERROR: " + error.message;
+  document.getElementById("driversList").innerHTML = "<p style='text-align:center; color:red;'>Permission error - Check Rules in Firebase</p>";
 });
 </script>
-
 </body>
 </html>
