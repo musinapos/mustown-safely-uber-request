@@ -2,210 +2,76 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TAHOR - All Musina Businesses In One Pot</title>
-<link rel="manifest" href="manifest.json">
-<link rel="icon" href="icon.jpg">
-<link rel="apple-touch-icon" href="icon.jpg">
-<meta name="theme-color" content="#0A4A8C">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MUSTOWN UBER REQUEST - Musina</title>
+<link rel="icon" href="logo.png">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-:root{--blue:#0A4A8C;--dark:#0B3A6B;--orange:#FF6B00}
-body{background:#fff;color:#222}
-header{background:var(--blue);color:#fff;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
-.logo{font-weight:900;font-size:28px;letter-spacing:1px;display:flex;align-items:center;gap:8px}
-.logo span{color:var(--orange)}.logo small{display:block;font-size:10px;font-weight:400;letter-spacing:2px;color:#FFD9B0}
-nav{display:flex;gap:18px;align-items:center;font-size:14px}
-nav a{color:#fff;text-decoration:none}
-.cta{background:var(--orange);padding:10px 16px;border-radius:20px;color:#fff!important;font-weight:bold}
-.hero{background:linear-gradient(180deg,#D8E8F7,#EAF3FB);text-align:center;padding:40px 15px}
-.hero h1{color:var(--dark);font-size:32px}
-.hero p{margin:10px 0 20px;color:#444}
-.search{max-width:600px;margin:auto;background:#fff;border-radius:30px;padding:6px;display:flex;border:2px solid #0A4A8C}
-.search input{flex:1;border:none;outline:none;padding:12px 15px;font-size:15px;border-radius:30px}
-.search button{background:var(--orange);color:#fff;border:none;padding:10px 22px;border-radius:20px;font-weight:bold;cursor:pointer}
-.meta{font-size:12px;margin-top:10px;color:#555}
-.categories{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:16px 12px;max-width:800px;margin:auto}
-.cat{padding:16px 6px;border-radius:20px;cursor:pointer;font-weight:900;font-size:13px;color:#fff;box-shadow:0 6px 16px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;gap:6px;text-align:center;min-height:60px}
-.cat.active{outline:3px solid #fff}
-.cat.food{background:linear-gradient(135deg,#FF6B00,#FF8A3D)}
-.cat.retail{background:linear-gradient(135deg,#EC4899,#F472B6)}
-.cat.services{background:linear-gradient(135deg,#0F766E,#14B8A6)}
-.cat.book{background:linear-gradient(135deg,#6C2BD9,#9B5CFF)}
-.cat.preorder{background:linear-gradient(135deg,#0b5e2f,#25D366)}
-.cat.parts{background:linear-gradient(135deg,#0A4A8C,#2D7BFF)}
-.section{max-width:1100px;margin:auto;padding:10px 15px 30px}
-.section h2{text-align:center;color:var(--dark);font-size:24px;margin:10px 0}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:20px}
-.card{background:#fff;border:1px solid #eee;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.06)}
-.card img{width:100%;height:170px;object-fit:cover}
-.card-body{padding:15px}
-.badge{display:inline-block;background:var(--orange);color:#fff;font-size:11px;padding:4px 8px;border-radius:6px;margin-bottom:8px}
-.card h3{font-size:18px;color:var(--dark)}
-.stars{color:#FFA500;font-size:13px;margin:5px 0}
-.card p{font-size:13px;color:#555;line-height:1.5}
-.btn{display:block;text-align:center;margin-top:12px;border:1.5px solid var(--blue);color:var(--blue);padding:8px;border-radius:8px;font-weight:bold;text-decoration:none;cursor:pointer}
-.pricing{background:#FFEADF;padding:35px 15px;text-align:center}
-.pricing-grid{max-width:1000px;margin:20px auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}
-.plan{background:#fff;border-radius:14px;padding:22px;text-align:left;border:2px solid var(--blue)}
-.plan.featured{background:var(--orange);color:#fff;border-color:var(--orange)}
-.plan .price{font-size:36px;font-weight:900;margin:8px 0}
-.plan ul{list-style:none;font-size:13px;line-height:2}
-.plan button{width:100%;padding:10px;border:none;border-radius:8px;font-weight:bold;cursor:pointer;background:var(--blue);color:#fff;margin-top:10px}
-.plan.featured button{background:#fff;color:var(--orange)}
-.form-wrap{max-width:600px;margin:30px auto;background:#fff;border:1px solid #eee;border-radius:16px;padding:20px;box-shadow:0 4px 15px rgba(0,0,0,.06)}
-.form-wrap input,.form-wrap select,.form-wrap textarea{width:100%;padding:11px;margin:8px 0;border:1.5px solid #ddd;border-radius:10px}
-.form-wrap button{background:var(--orange);color:#fff;border:none;padding:13px;width:100%;border-radius:10px;font-weight:bold;font-size:16px}
-footer{background:var(--dark);color:#fff;padding:25px 15px;text-align:center;font-size:13px;line-height:1.7}
-footer a{color:#FFD9B0;text-decoration:none}
-.gallery{display:flex;gap:5px;padding:5px 5px 0}
-.gallery img{width:50%;height:90px;object-fit:cover;border-radius:8px}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;z-index:999;overflow-y:auto;padding:12px}
-.modal.open{display:block}
-.modal-inner{max-width:700px;margin:20px auto;background:#fff;border-radius:20px;overflow:hidden}
-.modal-head{background:#6C2BD9;color:#fff;padding:20px;text-align:center}
-.close-btn{background:#fff;color:#6C2BD9;border:none;padding:10px 18px;border-radius:20px;font-weight:bold;cursor:pointer;margin-top:10px}
-/* JJ + MUSTOWN INSIDE */
-.jj-wrap{background:#0f172a;color:#fff;border-radius:18px;padding:16px;margin-top:12px}
-.jj-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.jj-card{background:#1e293b;border-radius:14px;overflow:hidden;cursor:pointer}
-.jj-card img{width:100%;height:110px;object-fit:cover}
-.jj-card div{padding:10px}
-.jj-room{display:none;background:#1e293b;padding:14px;border-radius:14px;margin-top:10px}
-.jj-room.active{display:block}
-.jj-room input{width:100%;padding:11px;margin:7px 0;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#fff}
-.jj-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center;font-size:11px;margin:10px 0}
-.jj-day{padding:9px 0;background:#0f172a;border-radius:8px;cursor:pointer}
-.jj-day.dis{background:#111827;color:#475569;text-decoration:line-through}
-.jj-day.sel{background:#22c55e;color:#000;font-weight:900}
-.jj-btn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:900;margin-top:8px;cursor:pointer}
-.mu-wrap{background:#0f172a;color:#fff;border-radius:18px;padding:16px;margin-top:12px}
-.mu-wrap input,.mu-wrap select,.mu-wrap textarea{width:100%;padding:11px;margin:7px 0;border-radius:10px;border:1px solid #334155;background:#fff;color:#000}
-.mu-driver{display:flex;gap:10px;align-items:center;background:#f8fafc;color:#000;padding:10px;border-radius:10px;margin-top:8px}
-.mu-driver img{width:50px;height:50px;border-radius:50%;object-fit:cover;background:#cbd5e1}
+body{background:#0f172a;color:#fff}
+header{background:#0f172a;color:#fff;padding:16px;text-align:center;border-bottom:2px solid #16a34a}
+header h1{font-size:26px;letter-spacing:2px}
+header h1 span{color:#16a34a}
+header p{font-size:12px;opacity:.8}
+.wrap{max-width:520px;margin:auto;padding:14px}
+.topCard{text-align:center;background:#fff;color:#000;border-radius:18px;padding:16px}
+.topCard .emoji{font-size:54px}
+.form{background:#fff;color:#000;border-radius:18px;padding:16px;margin-top:12px}
+.form h3{text-align:center;margin-bottom:10px}
+.form label{font-size:12px;font-weight:700;color:#333}
+.form input,.form select,.form textarea{width:100%;padding:12px;margin:6px 0 10px;border:1.5px solid #ddd;border-radius:10px;font-size:14px}
+.btn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:900;font-size:16px;cursor:pointer;margin-top:6px}
+.btn-green{background:#16a34a;color:#fff}
+.btn-dark{background:#0f172a;color:#fff}
+.quote{display:none;margin-top:12px;background:#f1f5f9;padding:14px;border-radius:12px;text-align:center}
+.quote b{font-size:14px}
+.quote span{font-size:22px;font-weight:900;color:#16a34a}
+.drivers{background:#fff;color:#000;border-radius:18px;padding:16px;margin-top:12px}
+.drivers h3{text-align:center}
+.driver{display:flex;gap:10px;align-items:center;background:#f8fafc;padding:10px;border-radius:10px;margin-top:8px}
+.driver img{width:50px;height:50px;border-radius:50%;object-fit:cover;background:#cbd5e1}
+.login{background:#fff;color:#000;border-radius:18px;padding:16px;margin-top:12px;text-align:center}
+.login p{font-size:13px;color:#64748b}
+footer{text-align:center;padding:16px;font-size:12px;opacity:.6}
 </style>
 </head>
 <body>
 <header>
-  <div class="logo"><img src="icon.jpg" style="width:38px;height:38px;border-radius:50%;object-fit:cover;"><div>TA<span>HOR</span><small>BUSINESSES MARKETING PLATFORM</small></div></div>
-  <nav><a href="#" onclick="goBackHome();return false">Home</a><a href="#businesses">Businesses</a><a href="#pricing">Pricing</a><a href="#add" class="cta">Add Your Business</a></nav>
+<h1>MUSTOWN <span>UBER</span></h1>
+<p>Mustown • Musina • DAVIS 0763584601</p>
 </header>
 
-<div class="hero">
-  <h1>All businesses in one pot</h1>
-  <p>Discover, connect, and support local businesses in Musina — all in one platform.</p>
-  <div class="search"><input id="searchInput" placeholder="Search for restaurants, shops, services in Musina..." oninput="filterBusinesses()"><button onclick="filterBusinesses()">Search</button></div>
-  <div class="meta">📍 Located in Musina • Limpopo • South Africa • 100+ businesses listed</div>
-</div>
+<div class="wrap">
+  <div class="topCard"><div class="emoji">🚕</div><h2>MUSTOWN UBER</h2><p style="font-size:13px;color:#64748b">Musina Only • Request a Ride</p></div>
 
-<div class="categories" id="businesses">
-  <div class="cat food" onclick="setCat('food',this)">🍔 Food</div>
-  <div class="cat retail" onclick="setCat('retail',this)">🛍️ Retail</div>
-  <div class="cat services" onclick="setCat('services',this)">🔧 Services</div>
-  <div class="cat book" onclick="setCat('bookstore',this)">📚 Bookstore</div>
-  <div class="cat parts" onclick="setCat('carparts',this)">🚗 Car Parts</div>
-  <div class="cat preorder" onclick="window.location.href='pre-order.html'">🛒 Pre-Order</div>
-</div>
-
-<div id="mainPage"><div class="section"><h2>Featured Businesses</h2><div class="grid" id="mainGrid"></div></div></div>
-
-<div id="insidePage" style="display:none">
-  <div class="section">
-    <button onclick="goBackHome()" style="background:#0A4A8C;color:#fff;border:none;padding:10px 18px;border-radius:20px;font-weight:bold;cursor:pointer;margin-bottom:12px">⬅️ Back to TAHOR Home</button>
-    <h2 id="insideTitle">Inside</h2>
-    <div class="grid" id="businessGrid"></div>
-
-    <!-- JJ TEAM -->
-    <div id="jjInside" style="display:none" class="jj-wrap">
-      <div style="text-align:center"><img src="logo.jpg" onerror="this.style.display='none'" style="width:90px;height:90px;object-fit:cover;border-radius:50%;border:3px solid #fff"><h2 style="color:#fff">JJ TEAM</h2><p style="font-size:12px;opacity:.8">JoJo Cleaning Services • 076 357 4601 • Sundays Closed • Musina</p></div>
-      <div class="jj-grid" id="jjHome">
-        <div class="jj-card" onclick="jjOpen('jojo')"><img src="jojo.jpg" onerror="this.src='https://via.placeholder.com/300'"><div><b>JOJO TANK</b><br><small>From R350</small></div></div>
-        <div class="jj-card" onclick="jjOpen('garden')"><img src="garden.jpg" onerror="this.src='https://via.placeholder.com/300'"><div><b>GARDEN</b><br><small>From R300</small></div></div>
-        <div class="jj-card" style="grid-column:1/-1" onclick="jjOpen('spring')"><img src="spring.jpg" onerror="this.src='https://via.placeholder.com/300'"><div><b>SPRING CLEANING</b><br><small>From R450 • Windows Included</small></div></div>
-      </div>
-      <div id="jj-jojo" class="jj-room"><span style="color:#38bdf8;cursor:pointer" onclick="jjBack()">← Back</span><h3>JOJO TANK CLEANING</h3><p style="font-size:13px;color:#94a3b8">1000L R350 • 2500L R550 • 5000L R850 • 10000L R1200</p><div id="cal-jojo"></div><input id="n-jojo" placeholder="Full Name"><input id="p-jojo" placeholder="Phone"><input id="a-jojo" placeholder="Address - Musina"><button class="jj-btn" style="background:#22c55e" onclick="jjBook('JoJo Tank','jojo')">✅ Confirm Booking</button><button class="jj-btn" style="background:#f59e0b" onclick="jjPay('JoJo Tank')">💳 Pay Online Now</button></div>
-      <div id="jj-garden" class="jj-room"><span style="color:#38bdf8;cursor:pointer" onclick="jjBack()">← Back</span><h3>GARDEN SERVICE</h3><p style="font-size:13px;color:#94a3b8">Small R300 • Medium R450 • Large R650</p><div id="cal-garden"></div><input id="n-garden" placeholder="Full Name"><input id="p-garden" placeholder="Phone"><input id="a-garden" placeholder="Address - Musina"><button class="jj-btn" style="background:#22c55e" onclick="jjBook('Garden Service','garden')">✅ Confirm Booking</button><button class="jj-btn" style="background:#f59e0b" onclick="jjPay('Garden Service')">💳 Pay Online Now</button></div>
-      <div id="jj-spring" class="jj-room"><span style="color:#38bdf8;cursor:pointer" onclick="jjBack()">← Back</span><h3>SPRING CLEANING</h3><p style="font-size:13px;color:#94a3b8">Spring R450 • Window Cleaning R450 Included • High Windows R250</p><button class="jj-btn" style="background:#0ea5e9;color:#fff" onclick="alert('Window Cleaning R450 Included')">+ Window Cleaning R450</button><div id="cal-spring"></div><input id="n-spring" placeholder="Full Name"><input id="p-spring" placeholder="Phone"><input id="a-spring" placeholder="Address - Musina"><button class="jj-btn" style="background:#22c55e" onclick="jjBook('Spring Cleaning','spring')">✅ Confirm Booking</button><button class="jj-btn" style="background:#f59e0b" onclick="jjPay('Spring Cleaning')">💳 Pay Online Now</button><button class="jj-btn" style="background:#fff" onclick="window.open('https://wa.me/27763574601?text=Hi JJ TEAM I need Spring','_blank')">💬 WhatsApp 0763574601</button></div>
-    </div>
-
-    <!-- MUSTOWN UBER - MUSINA ONLY -->
-    <div id="muInside" style="display:none" class="mu-wrap">
-      <div style="text-align:center"><img src="logo.png" onerror="this.style.display='none'" style="width:80px;height:80px;object-fit:cover;border-radius:18px;background:#fff"><div style="font-size:50px">🚕</div><h2 style="color:#fff">MUSTOWN UBER</h2><p style="font-size:12px;opacity:.8">Mustown • Musina • DAVIS 0763584601</p></div>
-      <div style="background:#fff;color:#000;border-radius:14px;padding:14px;margin-top:12px">
-        <h3 style="text-align:center">🚕 Request a Ride - Musina</h3>
-        <label>Your Name</label><input id="mu-name" placeholder="e.g. Thabo">
-        <label>Phone</label><input id="mu-phone" placeholder="e.g. 078 123 4567">
-        <label>Pickup Location</label><input id="mu-pickup" value="Mustown, Musina">
-        <label>Destination</label><input id="mu-dest" placeholder="e.g. Musina CBD, Nancefield, Ext 14">
-        <label>Passengers</label>
-        <select id="mu-pass"><option value="1">1 Passenger</option><option value="2">2 Passengers</option><option value="3">3 Passengers</option><option value="4">4 Passengers</option><option value="5">5 Passengers</option><option value="6">6 Passengers</option><option value="7">7 Passengers</option></select>
-        <label>Notes</label><textarea id="mu-notes" rows="2" placeholder="Any extra info..."></textarea>
-        <button class="jj-btn" style="background:#16a34a;color:#fff;font-size:18px" onclick="muQuote()">🚕 Request Uber Now</button>
-        <div id="mu-quote" style="display:none;margin-top:10px;background:#f1f5f9;padding:12px;border-radius:10px"><b id="mu-quoteText"></b><br><span id="mu-total" style="font-size:20px;font-weight:900"></span><br><button class="jj-btn" style="background:#16a34a;color:#fff" onclick="muConfirm()">✅ Confirm & Send WhatsApp</button></div>
-      </div>
-      <div style="background:#fff;color:#000;border-radius:14px;padding:14px;margin-top:12px">
-        <h3 style="text-align:center">Our Drivers <span style="color:#16a34a">● LIVE</span> - Musina</h3>
-        <p style="text-align:center;font-size:12px;color:#64748b" id="mu-debug">Loading from Firebase...</p>
-        <div id="mu-drivers"></div>
-      </div>
-      <div style="background:#fff;color:#000;border-radius:14px;padding:14px;margin-top:12px;text-align:center">
-        <h3>🚗 Driver Login</h3><p style="font-size:13px;color:#64748b">DAVIS 0763584601 • John 0725660255</p>
-        <input id="mu-driverName" placeholder="Driver Name e.g. DAVIS">
-        <button class="jj-btn" style="background:#0f172a;color:#fff" onclick="alert('Driver logged in: '+document.getElementById('mu-driverName').value)">Login as Driver</button>
-      </div>
-    </div>
+  <div class="form">
+    <h3>🚕 Request a Ride - Musina</h3>
+    <label>Your Name</label><input id="mu-name" placeholder="e.g. Thabo">
+    <label>Phone</label><input id="mu-phone" placeholder="e.g. 078 123 4567">
+    <label>Pickup Location</label><input id="mu-pickup" value="Mustown, Musina">
+    <label>Destination</label><input id="mu-dest" placeholder="e.g. Musina CBD, Nancefield, Ext 14">
+    <label>Passengers</label>
+    <select id="mu-pass"><option value="1">1 Passenger</option><option value="2">2 Passengers</option><option value="3">3 Passengers</option><option value="4">4 Passengers</option><option value="5">5 Passengers</option><option value="6">6 Passengers</option><option value="7">7 Passengers</option></select>
+    <label>Notes</label><textarea id="mu-notes" rows="2" placeholder="Any extra info..."></textarea>
+    <button class="btn btn-green" onclick="muQuote()">🚕 Request Uber Now</button>
+    <div id="mu-quote" class="quote"><b id="mu-quoteText"></b><br><span id="mu-total"></span><br><button class="btn btn-green" onclick="muConfirm()">✅ Confirm & Send WhatsApp</button></div>
   </div>
+
+  <div class="drivers">
+    <h3>Our Drivers <span style="color:#16a34a">● LIVE</span> - Musina</h3>
+    <p style="text-align:center;font-size:12px;color:#64748b" id="mu-debug">Loading from Firebase...</p>
+    <div id="mu-drivers"></div>
+  </div>
+
+  <div class="login">
+    <h3>🚗 Driver Login</h3><p>DAVIS 0763584601 • John 0725660255</p>
+    <input id="mu-driverName" placeholder="Driver Name e.g. DAVIS" style="width:100%;padding:12px;margin:8px 0;border:1.5px solid #ddd;border-radius:10px">
+    <button class="btn btn-dark" onclick="alert('Driver logged in: '+document.getElementById('mu-driverName').value)">Login as Driver</button>
+  </div>
+
+  <footer>MUSTOWN UBER • MUSINA • Powered by TAHOR / Musina POS Systems</footer>
 </div>
-
-<div class="pricing" id="pricing"><h2>Business Pricing</h2><div class="pricing-grid"><div class="plan"><h3>Package 1 - Basic</h3><div class="price">R60</div><ul><li>✓ Business card inside TAHOR</li><li>✓ Pictures only</li></ul><button onclick="selectPlan('Package 1 - Basic R60')">Choose Basic R60</button></div><div class="plan featured"><h3>Package 2 - Standard</h3><div class="price">R100</div><ul><li>✓ Everything in Package 1</li><li>✓ Order Button inside TAHOR</li></ul><button onclick="selectPlan('Package 2 - Standard R100')">Get Standard R100</button></div><div class="plan"><h3>Package 3 - Premium</h3><div class="price">R140</div><ul><li>✓ Everything in Package 2</li><li>✓ Own Mini App inside TAHOR</li></ul><button onclick="selectPlan('Package 3 - Premium R140')">Get Premium R140</button></div></div></div>
-
-<div class="section" id="add"><div class="form-wrap"><h2 style="color:var(--dark)">ADD YOUR BUSINESS IN THE POT</h2><input id="bName" placeholder="Business Name"><select id="bCat"><option value="food">Food</option><option value="retail">Retail</option><option value="services">Services</option><option value="bookstore">Bookstore</option><option value="carparts">Used Car Parts</option></select><input id="bPhone" placeholder="Phone / WhatsApp"><input id="bLoc" placeholder="Location e.g. Musina, Central"><textarea id="bDesc" placeholder="What do you sell?"></textarea><select id="bPlan"><option>Package 1 - Basic R60</option><option>Package 2 - Standard R100</option><option>Package 3 - Premium R140</option></select><button onclick="addBusiness()">Add My Business →</button><p id="msg" style="text-align:center;color:green;margin-top:10px"></p></div></div>
-
-<footer><strong style="font-size:20px">TA<span style="color:#FF6B00">HOR</span></strong><br>Musina Ext 14, 5224 • Musina, Limpopo<br>shaifrank6@gmail.com • 068 036 1133 • WhatsApp 079 907 3779<br>© 2026 TAHOR • Designed by Musina POS Systems</footer>
 
 <script>
-let businesses=[
-  {name:"JJ TEAM - JoJo Cleaning Services",cat:"services",rating:"5.0 ★",type:"Services • Cleaning • Musina",loc:"Musina, Limpopo • 076 357 4601",desc:"JoJo Tank, Garden & Spring Cleaning + Window Cleaning. Sundays Closed. Book & Pay Online.",img:"logo.jpg",gallery:["jojo.jpg","spring.jpg"],open:"Open now • Mon-Sat",isJJ:true},
-  {name:"MUSTOWN UBER REQUEST",cat:"services",rating:"5.0 ★",type:"Uber • Transport • Musina",loc:"Mustown, Musina • 076 358 4601",desc:"Mustown Uber - Musina only. DAVIS Rumion Plate 2264 L, John. Request ride, see quote, confirm on WhatsApp.",img:"logo.png",open:"Open now • Musina",isMustown:true},
-  {name:"MOONATE KO KASI",cat:"food",rating:"5.0 ★",type:"Fast Food • Delivery",loc:"Musina, Central • 20-35 min",desc:"Giant Rolls Box, Loaded Tower. FREE delivery within 3km. 0799073779",img:"pic1.jpg",gallery:["pic2.jpg","pic3.jpg"],link:"https://musinapos.github.io/moonate-ko-kasi/",open:"Open now"},
-  {name:"TAHOR Kids Bookstore",cat:"bookstore",rating:"5.0 ★",type:"Kids Books",loc:"Musina • Online",desc:"Passion Over Laziness. Kids 5-10. FREE for testing.",img:"pic4.jpg",open:"Open now",isBookstore:true},
-];
-let currentCat='all';
-function renderMain(){
-  document.getElementById('mainGrid').innerHTML=businesses.map(b=>{
-    if(b.isJJ) return `<div class="card"><img src="${b.img}" onerror="this.src='https://via.placeholder.com/300'"><div class="card-body"><span class="badge">SERVICES</span><h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div><p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p><a class="btn" onclick="setCat('services',document.querySelector('.cat.services'))">Open JJ TEAM App →</a></div></div>`;
-    if(b.isMustown) return `<div class="card"><div style="height:170px;background:#0f172a;display:flex;align-items:center;justify-content:center;font-size:80px">🚕</div><div class="card-body"><span class="badge">UBER • MUSINA</span><h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div><p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p><a class="btn" onclick="setCat('services',document.querySelector('.cat.services'))">Request Uber Now →</a></div></div>`;
-    return `<div class="card"><img src="${b.img}"><div class="card-body"><span class="badge">${b.cat.toUpperCase()}</span><h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div><p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p><a class="btn" href="${b.link||'#'}" target="_blank">View Details →</a></div></div>`;
-  }).join('');
-}
-function render(){
-  let q=document.getElementById('searchInput').value.toLowerCase();
-  let showJJ = currentCat==='services';
-  document.getElementById('jjInside').style.display = showJJ ? 'block':'none';
-  document.getElementById('muInside').style.display = showJJ ? 'block':'none';
-  let filtered=businesses.filter(b=>(currentCat==='all'||b.cat===currentCat) && (b.name.toLowerCase().includes(q)||b.desc.toLowerCase().includes(q)));
-  document.getElementById('businessGrid').innerHTML=filtered.map(b=>{
-    if(b.isJJ) return `<div class="card"><img src="${b.img}" onerror="this.src='https://via.placeholder.com/300'"><div class="card-body"><span class="badge">SERVICES</span><h3>${b.name}</h3><p>📍 ${b.loc}<br>${b.desc}</p><a class="btn" onclick="document.getElementById('jjInside').scrollIntoView({behavior:'smooth'})">Open JJ TEAM App →</a></div></div>`;
-    if(b.isMustown) return `<div class="card"><div style="height:170px;background:#0f172a;display:flex;align-items:center;justify-content:center;font-size:80px">🚕</div><div class="card-body"><span class="badge">UBER • MUSINA</span><h3>${b.name}</h3><p>📍 ${b.loc}<br>${b.desc}</p><a class="btn" onclick="document.getElementById('muInside').scrollIntoView({behavior:'smooth'})">Request Uber Now →</a></div></div>`;
-    return `<div class="card"><img src="${b.img}"><div class="card-body"><span class="badge">${b.cat.toUpperCase()}</span><h3>${b.name}</h3><p>📍 ${b.loc}<br>${b.desc}</p><a class="btn" href="${b.link||'#'}" target="_blank">View Details →</a></div></div>`;
-  }).join('');
-}
-function setCat(cat,el){currentCat=cat;document.querySelectorAll('.cat').forEach(c=>c.classList.remove('active'));if(el)el.classList.add('active');document.getElementById('mainPage').style.display='none';document.getElementById('insidePage').style.display='block';document.getElementById('insideTitle').innerText = el ? el.innerText+' — Inside TAHOR' : 'Inside TAHOR';render();window.scrollTo(0,0);}
-function goBackHome(){document.getElementById('mainPage').style.display='block';document.getElementById('insidePage').style.display='none';currentCat='all';document.querySelectorAll('.cat').forEach(c=>c.classList.remove('active'));renderMain();window.scrollTo(0,0);}
-function filterBusinesses(){ if(document.getElementById('insidePage').style.display==='block') render(); else renderMain(); }
-function selectPlan(p){document.getElementById('bPlan').value=p;document.getElementById('add').scrollIntoView({behavior:'smooth'});alert('You selected '+p);}
-function addBusiness(){let name=document.getElementById('bName').value;if(!name){alert('Enter name');return;}businesses.push({name,cat:document.getElementById('bCat').value,rating:"New",loc:document.getElementById('bLoc').value,desc:document.getElementById('bDesc').value,img:"https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80",open:"Open now"});renderMain();document.getElementById('msg').innerText='✅ '+name+' added!';}
-renderMain();
-// JJ LOGIC
-let jjSelected={};
-function jjBack(){document.querySelectorAll('.jj-room').forEach(r=>r.classList.remove('active'));document.getElementById('jjHome').style.display='grid'}
-function jjOpen(id){document.getElementById('jjHome').style.display='none';document.querySelectorAll('.jj-room').forEach(r=>r.classList.remove('active'));document.getElementById('jj-'+id).classList.add('active')}
-function jjBuild(id){let el=document.getElementById('cal-'+id);let today=new Date();let html='<label style="font-size:11px;color:#94a3b8">Select Date - Sundays Closed</label><div class="jj-cal"><b>Su</b><b>Mo</b><b>Tu</b><b>We</b><b>Th</b><b>Fr</b><b>Sa</b>';for(let i=0;i<30;i++){let d=new Date(today);d.setDate(today.getDate()+i);let isSun=d.getDay()===0;html+=`<div class="jj-day ${isSun?'dis':''}" onclick="${isSun?'':'jjSelect(this,\''+id+'\')'}">${d.getDate()}/${d.getMonth()+1}</div>`}html+='</div>';el.innerHTML=html;}
-function jjSelect(el,id){document.querySelectorAll('#cal-'+id+' .jj-day').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');jjSelected[id]=el.innerText}
-jjBuild('jojo');jjBuild('garden');jjBuild('spring');
-function jjBook(s,id){let n=document.getElementById('n-'+id).value;if(!n){alert('Fill Name');return}window.open('https://wa.me/27763574601?text='+encodeURIComponent('Hi JJ TEAM, I want '+s+' on '+(jjSelected[id]||'')+' Name: '+n),'_blank')}
-function jjPay(s){alert(s+' - PayFast / Yoco / Card');window.open('https://wa.me/27763574601?text='+encodeURIComponent('I want to pay online for '+s),'_blank')}
-// MUSTOWN LOGIC - MUSINA ONLY
 let muTotal=0;
 function muDistance(dest){let d=dest.toLowerCase();if(d.includes("cbd")||d.includes("musina town"))return 6;if(d.includes("nancefield"))return 5;if(d.includes("ext 14"))return 4;if(d.includes("mustown"))return 3;if(d.includes("hospital"))return 7;if(d.includes("border")||d.includes("beitbridge"))return 10;if(d.includes("mall")||d.includes("savoy")||d.includes("shoprite"))return 6;return 8;}
 function muQuote(){
@@ -232,14 +98,14 @@ onSnapshot(collection(db, "drivers"), (snap) => {
   document.getElementById("mu-debug").innerText = "Found in Firebase: " + snap.size + " drivers - Musina";
   let html="";
   if(snap.empty){
-    html=`<div class="mu-driver"><img src="logo.png" onerror="this.src='https://via.placeholder.com/60'"><div><b>🚗 DAVIS</b><br>📞 0763584601<br>Car: Rumion | Plate: 2264 L | Available</div></div><div class="mu-driver"><img src="logo.png" onerror="this.src='https://via.placeholder.com/60'"><div><b>🚗 John</b><br>📞 0725660255<br>Driver | Available</div></div>`;
+    html=`<div class="driver"><img src="logo.png" onerror="this.src='https://via.placeholder.com/60'"><div><b>🚗 DAVIS</b><br>📞 0763584601<br>Car: Rumion | Plate: 2264 L | Available</div></div><div class="driver"><img src="logo.png" onerror="this.src='https://via.placeholder.com/60'"><div><b>🚗 John</b><br>📞 0725660255<br>Driver | Available</div></div>`;
   } else {
-    snap.forEach(doc=>{let d=doc.data(); html+=`<div class="mu-driver"><img src="${d.photo||'logo.png'}" onerror="this.src='https://via.placeholder.com/60'"><div><b>🚗 ${d.name}</b><br>📞 ${d.phone}<br>Car: ${d.car||''} | Plate: ${d.plate||''} | ${d.status||'Available'}</div></div>`;});
+    snap.forEach(doc=>{let d=doc.data(); html+=`<div class="driver"><img src="${d.photo||'logo.png'}" onerror="this.src='https://via.placeholder.com/60'"><div><b>🚗 ${d.name}</b><br>📞 ${d.phone}<br>Car: ${d.car||''} | Plate: ${d.plate||''} | ${d.status||'Available'}</div></div>`;});
   }
   document.getElementById("mu-drivers").innerHTML=html;
 }, (err)=>{
   document.getElementById("mu-debug").innerText="Firebase error - showing saved drivers";
-  document.getElementById("mu-drivers").innerHTML=`<div class="mu-driver"><img src="logo.png"><div><b>🚗 DAVIS</b><br>📞 0763584601<br>Car: Rumion | Plate: 2264 L</div></div><div class="mu-driver"><img src="logo.png"><div><b>🚗 John</b><br>📞 0725660255<br>Driver</div></div>`;
+  document.getElementById("mu-drivers").innerHTML=`<div class="driver"><img src="logo.png"><div><b>🚗 DAVIS</b><br>📞 0763584601<br>Car: Rumion | Plate: 2264 L</div></div><div class="driver"><img src="logo.png"><div><b>🚗 John</b><br>📞 0725660255<br>Driver</div></div>`;
 });
 </script>
 </body>
