@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MUSTOWN UBER - Musina | ROMEO</title>
+<title>MUSTOWN UBER - Musina</title>
 <link rel="icon" href="logo.png">
 <meta name="theme-color" content="#16a34a">
 <style>
@@ -13,52 +13,55 @@ body{background:#020617;color:#fff}
 header{background:#0f172a;padding:18px;text-align:center;border-bottom:2px solid #16a34a;position:sticky;top:0;z-index:20}
 header h1{font-size:26px;letter-spacing:2px;font-weight:800} header h1 span{color:#16a34a}
 .wrap{max-width:560px;margin:auto;padding:14px;padding-bottom:100px}
-.topCard{text-align:center;background:linear-gradient(135deg,#fff 0%,#e2e8f0 100%);color:#020617;border-radius:24px;padding:20px;box-shadow:0 10px 40px rgba(22,163,74,0.25)}
-.car-wrap{position:relative;width:100%;max-width:340px;margin:0 auto;height:200px;display:flex;align-items:center;justify-content:center}
-.car-wrap img.car{width:100%;max-width:300px;animation:carFloat 2.5s ease-in-out infinite;filter:drop-shadow(0 12px 24px rgba(0,0,0,0.4))}
-@keyframes carFloat{0%,100%{transform:translateY(0px)}50%{transform:translateY(-10px)}}
-.car-wrap img.logo{position:absolute;top:8px;left:50%;width:78px;height:78px;border-radius:50%;border:3px solid #16a34a;background:#fff;object-fit:cover;transform:translateX(-50%);box-shadow:0 0 18px #16a34a;z-index:5}
+.topCard{text-align:center;background:linear-gradient(135deg,#fff 0%,#e2e8f0 100%);color:#020617;border-radius:24px;padding:16px;box-shadow:0 10px 40px rgba(22,163,74,0.25);position:relative;overflow:visible}
+.car-wrap{position:relative;width:100%;max-width:340px;margin:0 auto;display:flex;align-items:center;justify-content:center;padding-top:10px}
+/* CAR - NO SPIN - ONLY FLOAT - NOT BLOCKING */
+.car-wrap img.car{width:100%;max-width:280px;animation:carFloat 2.5s ease-in-out infinite;filter:drop-shadow(0 12px 24px rgba(0,0,0,0.4));display:block}
+@keyframes carFloat{0%,100%{transform:translateY(0px)}50%{transform:translateY(-8px)}}
+/* LOGO FIXED - SMALL - TOP RIGHT - NOT BLOCKING */
+.car-wrap img.logo{
+  position:absolute;top:0px;right:8px;
+  width:48px;height:48px;border-radius:50%;
+  border:2px solid #16a34a;background:#fff;object-fit:cover;
+  box-shadow:0 2px 10px rgba(0,0,0,0.2);
+  z-index:5;
+}
 .driver img.romeo{animation:romeoSpin 2s linear infinite}
-@keyframes romeoSpin{0%{transform:rotate(0deg)}50%{transform:rotate(180deg) scale(1.08)}100%{transform:rotate(360deg)}}
+@keyframes romeoSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
 .form{background:#fff;color:#000;border-radius:22px;padding:18px;margin-top:14px;box-shadow:0 8px 30px rgba(0,0,0,0.15)}
 .form label{font-size:11px;font-weight:800;color:#334155;text-transform:uppercase;letter-spacing:1px}
-.form input,.form select,.form textarea{width:100%;padding:13px;margin:6px 0 12px;border:1.5px solid #e2e8f0;border-radius:12px;font-size:14px;background:#f8fafc;outline:none}
-.form input:focus{border-color:#16a34a}
+.form input,.form select,.form textarea{width:100%;padding:13px;margin:6px 0 12px;border:1.5px solid #e2e8f0;border-radius:12px;font-size:14px;background:#f8fafc}
 .btn{width:100%;padding:14px;border:none;border-radius:14px;font-weight:900;font-size:14px;cursor:pointer;margin-top:6px}
-.btn-green{background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;box-shadow:0 6px 18px rgba(22,163,74,0.4)}
+.btn-green{background:linear-gradient(135deg,#16a34a,#15803d);color:#fff}
 .btn-dark{background:#0f172a;color:#fff}
 .btn-ghost{background:#f1f5f9;color:#0f172a}
-.quote{display:none;margin-top:14px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px solid #16a34a;padding:16px;border-radius:16px;text-align:center;color:#14532d}
+.quote{display:none;margin-top:14px;background:#f0fdf4;border:2px solid #16a34a;padding:16px;border-radius:16px;text-align:center;color:#14532d}
 .drivers{background:#fff;color:#000;border-radius:22px;padding:18px;margin-top:14px}
 .driver{display:flex;gap:12px;align-items:center;background:#f8fafc;padding:12px;border-radius:14px;margin-top:10px;border:1px solid #e2e8f0}
 .driver img{width:58px;height:58px;border-radius:50%;object-fit:cover;border:2px solid #16a34a;background:#cbd5e1}
 .status{font-size:10px;padding:4px 10px;border-radius:20px;font-weight:900;display:inline-block;margin-top:4px}
 .s-available{background:#fef9c3;color:#854d0e;border:1px solid #facc15}
-.s-busy{background:#fef3c7;color:#92400e} .s-offline{background:#e2e8f0;color:#475569}
 .tabs{display:flex;gap:8px;margin-top:14px} .tab{flex:1;padding:12px;border-radius:12px;border:none;font-weight:800;font-size:12px;cursor:pointer;background:#1e293b;color:#94a3b8}
 .tab.active{background:#16a34a;color:#fff}
 .panel{display:none;margin-top:12px;background:#fff;color:#000;border-radius:22px;padding:18px} .panel.active{display:block}
 .rideCard{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:12px;font-size:13px;margin-top:8px}
 .alertBox{position:fixed;top:78px;left:50%;transform:translateX(-50%);background:#16a34a;color:#fff;padding:14px 20px;border-radius:14px;font-weight:800;z-index:100;display:none;box-shadow:0 8px 24px rgba(0,0,0,0.4);text-align:center;max-width:90%}
-footer{text-align:center;padding:18px;font-size:11px;opacity:.5;letter-spacing:1px}
+footer{text-align:center;padding:18px;font-size:11px;opacity:.5}
 </style>
 </head>
 <body>
 <div id="alertBox" class="alertBox">🚕 NEW RIDE!</div>
 <audio id="notifySound" src="https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3" preload="auto"></audio>
-
-<header><h1>MUSTOWN <span>UBER</span></h1><p>ROMEO • MUSINA • NEGOTIABLE • 0799073779 / 0725660255</p></header>
-
+<header><h1>MUSTOWN <span>UBER</span></h1><p>MUSINA • NEGOTIABLE • 0799073779 / 0725660255</p></header>
 <div class="wrap">
   <div class="topCard">
     <div class="car-wrap">
       <img class="car" src="car.png" onerror="this.src='logo.png'" alt="Mustown Car">
-      <img class="logo" src="logo.png" onerror="this.src='https://via.placeholder.com/100?text=MUSTOWN'" alt="Logo">
+      <img class="logo" src="logo.png" alt="Logo">
     </div>
-    <h2 style="font-weight:800">MUSTOWN UBER</h2>
-    <p style="font-size:12px;color:#475569">Main Car NOT Spinning • Only Romeo Inside Spins • Price Negotiable 🤝</p>
+    <h2 style="font-weight:800;margin-top:6px">MUSTOWN UBER</h2>
+    <p style="font-size:12px;color:#475569">Logo Fixed • Not Blocking • Price Negotiable 🤝</p>
   </div>
-
   <div class="form">
     <h3>🚕 Request Ride - Musina</h3>
     <label>Name</label><input id="mu-name" placeholder="Thabo">
@@ -74,23 +77,19 @@ footer{text-align:center;padding:18px;font-size:11px;opacity:.5;letter-spacing:1
       <button class="btn btn-green" onclick="muConfirm()">✅ CONFIRM & SEND TO BOTH NUMBERS</button>
     </div>
   </div>
-
   <div class="tabs">
     <button class="tab active" onclick="showTab('driversTab',this)">🚗 LIVE DRIVERS</button>
     <button class="tab" onclick="showTab('driverTab',this)">🔑 DRIVER LOGIN</button>
     <button class="tab" onclick="showTab('adminTab',this)">⚙️ ADMIN</button>
   </div>
-
   <div id="driversTab" class="panel active">
     <h3 style="text-align:center">Drivers <span style="color:#16a34a">● LIVE</span></h3>
-    <p style="text-align:center;font-size:11px;color:#64748b" id="mu-debug">Connecting Firebase...</p>
+    <p style="text-align:center;font-size:11px;color:#64748b" id="mu-debug">Connecting...</p>
     <div id="mu-drivers"></div>
     <div id="mu-rides" style="margin-top:12px"></div>
   </div>
-
   <div id="driverTab" class="panel">
     <h3 style="text-align:center">🚗 Driver Portal</h3>
-    <p style="text-align:center;font-size:12px;color:#16a34a;font-weight:800">🔔 Login = Get loud alert + vibration</p>
     <label>Driver Name</label><input id="mu-driverName" placeholder="ROMEO">
     <label>Phone</label><input id="mu-driverPhone" placeholder="0763584601">
     <button class="btn btn-dark" onclick="driverLogin()">🔓 LOGIN & ENABLE ALERTS</button>
@@ -108,7 +107,6 @@ footer{text-align:center;padding:18px;font-size:11px;opacity:.5;letter-spacing:1
       <div id="driverRides"></div>
     </div>
   </div>
-
   <div id="adminTab" class="panel">
     <h3 style="text-align:center">⚙️ Admin - Add Driver</h3>
     <label>Name</label><input id="ad-name" placeholder="ROMEO">
@@ -116,14 +114,12 @@ footer{text-align:center;padding:18px;font-size:11px;opacity:.5;letter-spacing:1
     <label>Car</label><input id="ad-car" placeholder="Toyota Rumion">
     <label>Plate</label><input id="ad-plate" placeholder="2264 L">
     <label>Status</label><select id="ad-status"><option>Available</option><option>On Trip</option><option>Offline</option></select>
-    <label>Photo URL</label><input id="ad-photo" placeholder="logo.png">
+    <label>Photo</label><input id="ad-photo" placeholder="logo.png">
     <button class="btn btn-green" onclick="addDriver()">➕ ADD DRIVER</button>
     <div id="allRidesAdmin" style="margin-top:12px"></div>
   </div>
-
-  <footer>MUSTOWN UBER • ROMEO INSIDE SPINNING ONLY • MUSINA • 0799073779 / 0725660255</footer>
+  <footer>MUSTOWN UBER • LOGO FIXED • ROMEO SPINNING BELOW • MUSINA</footer>
 </div>
-
 <script>
 let currentDriver=null; let lastRideCount=0; let isFirstLoad=true;
 function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
@@ -137,9 +133,9 @@ function muQuote(){
 }
 async function muConfirm(){
   let n=document.getElementById('mu-name').value, ph=document.getElementById('mu-phone').value, pk=document.getElementById('mu-pickup').value, ds=document.getElementById('mu-dest').value, ps=document.getElementById('mu-pass').value, nt=document.getElementById('mu-notes').value;
-  let data={name:n, phone:ph, pickup:pk, destination:ds, passengers:ps, notes:nt, price:"NEGOTIABLE - Driver & Customer", status:'Pending', createdAt:new Date().toISOString(), city:'Musina'};
+  let data={name:n, phone:ph, pickup:pk, destination:ds, passengers:ps, notes:nt, price:"NEGOTIABLE", status:'Pending', createdAt:new Date().toISOString()};
   if(window.saveRide) window.saveRide(data);
-  let msg=`*MUSTOWN UBER - NEW*%0A%0A*Name:* ${n}%0A*Phone:* ${ph}%0A*From:* ${pk}%0A*To:* ${ds}%0A*Pass:* ${ps}%0A*Notes:* ${nt}%0A*PRICE: NEGOTIABLE*%0A%0AMusina`;
+  let msg=`*MUSTOWN UBER - NEW*%0A%0A*Name:* ${n}%0A*Phone:* ${ph}%0A*From:* ${pk}%0A*To:* ${ds}%0A*Pass:* ${ps}%0A*Notes:* ${nt}%0A*PRICE: NEGOTIABLE*`;
   window.open(`https://wa.me/27799073779?text=${msg}`,'_blank');
   setTimeout(()=>{window.open(`https://wa.me/27725660255?text=${msg}`,'_blank');},800);
 }
@@ -154,7 +150,7 @@ function driverLogin(){
 }
 function setDriverStatus(s){ if(!currentDriver) return; document.getElementById('loggedDriverStatus').innerText='Status: '+s; if(window.updateDriverStatus) window.updateDriverStatus(currentDriver.name,s); }
 function testAlert(){
-  const a=document.getElementById('alertBox'); a.style.display='block'; a.innerHTML='🔔 Alert Working! ROMEO will spin inside!';
+  const a=document.getElementById('alertBox'); a.style.display='block'; a.innerHTML='🔔 Alert Working! ROMEO spinning below!';
   document.getElementById('notifySound').play().catch(()=>{});
   if(navigator.vibrate) navigator.vibrate([300,100,300]);
   setTimeout(()=>{a.style.display='none';},3500);
@@ -170,7 +166,6 @@ function triggerDriverAlert(ride){
   setTimeout(()=>{a.style.display='none';},8000);
 }
 </script>
-
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, onSnapshot, addDoc, doc, updateDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
@@ -193,16 +188,16 @@ window.addDriver = async ()=>{
   alert(name+' added ✅');
 }
 onSnapshot(collection(db,"drivers"), (snap)=>{
-  document.getElementById("mu-debug").innerText="✅ LIVE: "+snap.size+" drivers - Firebase OK - Only ROMEO spins inside";
+  document.getElementById("mu-debug").innerText="✅ LIVE: "+snap.size+" drivers - Logo Fixed, ROMEO Spinning Below";
   let html="";
   snap.forEach(d=>{
     let dd=d.data();
     let isRomeo=dd.name.toLowerCase().includes('romeo');
     let sc=dd.status=='Available'?'s-available':dd.status=='On Trip'?'s-busy':'s-offline';
-    html+=`<div class="driver"><img class="${isRomeo?'romeo':''}" src="${dd.photo||'logo.png'}" onerror="this.src='https://via.placeholder.com/60'"><div><b>🚗 ${dd.name} ${isRomeo?'🔄':''}</b><br>📞 ${dd.phone}<br>${dd.car||''} ${dd.plate||''}<br><span class="status ${sc}">● ${dd.status||'Available'}</span></div></div>`;
+    html+=`<div class="driver"><img class="${isRomeo?'romeo':''}" src="${dd.photo||'logo.png'}"><div><b>🚗 ${dd.name} ${isRomeo?'🔄':''}</b><br>📞 ${dd.phone}<br>${dd.car||''} ${dd.plate||''}<br><span class="status ${sc}">● ${dd.status||'Available'}</span></div></div>`;
   });
   if(snap.empty){
-    html=`<div class="driver"><img class="romeo" src="logo.png"><div><b>🚗 ROMEO 🔄</b><br>📞 0763584601<br>Toyota Rumion - 2264 L<br><span class="status s-available">● Available - Spinning Inside Here</span></div></div><div class="driver"><img src="logo.png"><div><b>🚗 DAVIS</b><br>📞 0763584601<br>Not spinning<br><span class="status s-available">● Available</span></div></div>`;
+    html=`<div class="driver"><img class="romeo" src="logo.png"><div><b>🚗 ROMEO 🔄</b><br>📞 0763584601<br>Toyota Rumion - 2264 L<br><span class="status s-available">● Available - Spinning</span></div></div><div class="driver"><img src="logo.png"><div><b>🚗 DAVIS</b><br>📞 0763584601<br>Not spinning<br><span class="status s-available">● Available</span></div></div>`;
   }
   document.getElementById("mu-drivers").innerHTML=html;
 });
@@ -211,7 +206,7 @@ onSnapshot(collection(db,"rides"), (snap)=>{
   if(!isFirstLoad && rides.length>lastRideCount){ let nr=rides[0]; if(typeof triggerDriverAlert==='function') triggerDriverAlert(nr); }
   lastRideCount=rides.length; isFirstLoad=false;
   let html=rides.slice(0,10).map(r=>`<div class="rideCard"><b>${r.name}</b> (${r.phone})<br>📍 ${r.pickup} → ${r.destination}<br>👥 ${r.passengers} • <b>${r.price}</b> • ${r.status}<br><small>${new Date(r.createdAt).toLocaleString()}</small></div>`).join('');
-  document.getElementById('mu-rides').innerHTML=html||'No rides - ROMEO waiting inside';
+  document.getElementById('mu-rides').innerHTML=html||'No rides';
   document.getElementById('allRidesAdmin').innerHTML=html||'No rides';
   document.getElementById('driverRides').innerHTML = rides.filter(r=>r.status==='Pending').slice(0,5).map(r=>`<div class="rideCard"><b>NEW:</b> ${r.name} - ${r.pickup} → ${r.destination}<br>${r.price} • ${r.phone}<br><div style="display:flex;gap:6px;margin-top:6px"><button class="btn btn-green" style="padding:8px;font-size:12px" onclick="acceptRide('${r.id}')">✅ ACCEPT</button><a href="https://wa.me/27${r.phone?.slice(-9)}" target="_blank" style="flex:1"><button class="btn btn-dark" style="padding:8px;font-size:12px;width:100%">CALL</button></a></div></div>`).join('') || 'No pending';
 });
