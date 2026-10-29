@@ -15,17 +15,9 @@ header h1{font-size:26px;letter-spacing:2px;font-weight:800} header h1 span{colo
 .wrap{max-width:560px;margin:auto;padding:14px;padding-bottom:100px}
 .topCard{text-align:center;background:linear-gradient(135deg,#fff 0%,#e2e8f0 100%);color:#020617;border-radius:24px;padding:16px;box-shadow:0 10px 40px rgba(22,163,74,0.25);position:relative;overflow:visible}
 .car-wrap{position:relative;width:100%;max-width:340px;margin:0 auto;display:flex;align-items:center;justify-content:center;padding-top:10px}
-/* CAR - NO SPIN - ONLY FLOAT - NOT BLOCKING */
 .car-wrap img.car{width:100%;max-width:280px;animation:carFloat 2.5s ease-in-out infinite;filter:drop-shadow(0 12px 24px rgba(0,0,0,0.4));display:block}
 @keyframes carFloat{0%,100%{transform:translateY(0px)}50%{transform:translateY(-8px)}}
-/* LOGO FIXED - SMALL - TOP RIGHT - NOT BLOCKING */
-.car-wrap img.logo{
-  position:absolute;top:0px;right:8px;
-  width:48px;height:48px;border-radius:50%;
-  border:2px solid #16a34a;background:#fff;object-fit:cover;
-  box-shadow:0 2px 10px rgba(0,0,0,0.2);
-  z-index:5;
-}
+.car-wrap img.logo{position:absolute;top:0px;right:8px;width:48px;height:48px;border-radius:50%;border:2px solid #16a34a;background:#fff;object-fit:cover;box-shadow:0 2px 10px rgba(0,0,0,0.2);z-index:5}
 .driver img.romeo{animation:romeoSpin 2s linear infinite}
 @keyframes romeoSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
 .form{background:#fff;color:#000;border-radius:22px;padding:18px;margin-top:14px;box-shadow:0 8px 30px rgba(0,0,0,0.15)}
@@ -36,11 +28,14 @@ header h1{font-size:26px;letter-spacing:2px;font-weight:800} header h1 span{colo
 .btn-dark{background:#0f172a;color:#fff}
 .btn-ghost{background:#f1f5f9;color:#0f172a}
 .quote{display:none;margin-top:14px;background:#f0fdf4;border:2px solid #16a34a;padding:16px;border-radius:16px;text-align:center;color:#14532d}
+.tracking{display:none;margin-top:14px;background:#fffbeb;border:2px solid #facc15;padding:16px;border-radius:16px;text-align:center;color:#713f12}
 .drivers{background:#fff;color:#000;border-radius:22px;padding:18px;margin-top:14px}
 .driver{display:flex;gap:12px;align-items:center;background:#f8fafc;padding:12px;border-radius:14px;margin-top:10px;border:1px solid #e2e8f0}
 .driver img{width:58px;height:58px;border-radius:50%;object-fit:cover;border:2px solid #16a34a;background:#cbd5e1}
 .status{font-size:10px;padding:4px 10px;border-radius:20px;font-weight:900;display:inline-block;margin-top:4px}
 .s-available{background:#fef9c3;color:#854d0e;border:1px solid #facc15}
+.s-busy{background:#fee2e2;color:#991b1b;border:1px solid #f87171}
+.s-offline{background:#e2e8f0;color:#475569;border:1px solid #94a3b8}
 .tabs{display:flex;gap:8px;margin-top:14px} .tab{flex:1;padding:12px;border-radius:12px;border:none;font-weight:800;font-size:12px;cursor:pointer;background:#1e293b;color:#94a3b8}
 .tab.active{background:#16a34a;color:#fff}
 .panel{display:none;margin-top:12px;background:#fff;color:#000;border-radius:22px;padding:18px} .panel.active{display:block}
@@ -52,12 +47,12 @@ footer{text-align:center;padding:18px;font-size:11px;opacity:.5}
 <body>
 <div id="alertBox" class="alertBox">🚕 NEW RIDE!</div>
 <audio id="notifySound" src="https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3" preload="auto"></audio>
-<header><h1>MUSTOWN <span>UBER</span></h1><p>MUSINA • NEGOTIABLE • 0799073779 / 0725660255</p></header>
+<header><h1>MUSTOWN <span>UBER</span></h1><p>MUSINA • NEGOTIABLE • 0725660255 / 0763584601</p></header>
 <div class="wrap">
   <div class="topCard">
     <div class="car-wrap">
       <img class="car" src="car.png" onerror="this.src='logo.png'" alt="Mustown Car">
-      <img class="logo" src="logo.png" alt="Logo">
+      <img class="logo" src="logo.png" onerror="this.style.display='none'" alt="Logo">
     </div>
     <h2 style="font-weight:800;margin-top:6px">MUSTOWN UBER</h2>
     <p style="font-size:12px;color:#475569">Logo Fixed • Not Blocking • Price Negotiable 🤝</p>
@@ -74,7 +69,12 @@ footer{text-align:center;padding:18px;font-size:11px;opacity:.5}
     <div id="mu-quote" class="quote">
       <div id="mu-quoteText" style="font-size:12px"></div>
       <div id="mu-total" style="font-size:22px;font-weight:900;margin:8px 0">PRICE: NEGOTIABLE 🤝</div>
-      <button class="btn btn-green" onclick="muConfirm()">✅ CONFIRM & SEND TO BOTH NUMBERS</button>
+      <button class="btn btn-green" onclick="muConfirm()">✅ CONFIRM & SEND RIDE REQUEST</button>
+    </div>
+    <div id="mu-tracking" class="tracking">
+      <b id="mu-trackTitle">📡 WAITING FOR DRIVER...</b>
+      <div id="mu-trackText" style="font-size:12px;margin-top:6px"></div>
+      <div id="mu-trackBtns" style="margin-top:10px"></div>
     </div>
   </div>
   <div class="tabs">
@@ -121,34 +121,52 @@ footer{text-align:center;padding:18px;font-size:11px;opacity:.5}
   <footer>MUSTOWN UBER • LOGO FIXED • ROMEO SPINNING BELOW • MUSINA</footer>
 </div>
 <script>
-let currentDriver=null; let lastRideCount=0; let isFirstLoad=true;
+let currentDriver=null; let lastRideCount=0; let isFirstLoad=true; let myRideId=localStorage.getItem('mustown_lastRide')||null;
+window.currentDriverName='';
 function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
 function muQuote(){
   let n=document.getElementById('mu-name').value.trim(), ph=document.getElementById('mu-phone').value.trim(), pk=document.getElementById('mu-pickup').value.trim(), ds=document.getElementById('mu-dest').value.trim();
-  if(!n||!ph||!pk||!ds){alert('Fill all fields Boss');return}
+  if(!n||!ph||!pk||!ds){alert('Fill all fields please');return}
   document.getElementById('mu-quote').style.display='block';
   document.getElementById('mu-quoteText').innerText=`From ${pk} to ${ds} • Musina • Negotiable`;
   document.getElementById('mu-total').innerText='PRICE: NEGOTIABLE 🤝';
   document.getElementById('mu-quote').scrollIntoView({behavior:'smooth'});
 }
 async function muConfirm(){
-  let n=document.getElementById('mu-name').value, ph=document.getElementById('mu-phone').value, pk=document.getElementById('mu-pickup').value, ds=document.getElementById('mu-dest').value, ps=document.getElementById('mu-pass').value, nt=document.getElementById('mu-notes').value;
+  let n=document.getElementById('mu-name').value.trim(), ph=document.getElementById('mu-phone').value.trim(), pk=document.getElementById('mu-pickup').value.trim(), ds=document.getElementById('mu-dest').value.trim(), ps=document.getElementById('mu-pass').value, nt=document.getElementById('mu-notes').value.trim();
+  if(!n||!ph||!pk||!ds){alert('Fill all fields please');return}
   let data={name:n, phone:ph, pickup:pk, destination:ds, passengers:ps, notes:nt, price:"NEGOTIABLE", status:'Pending', createdAt:new Date().toISOString()};
-  if(window.saveRide) window.saveRide(data);
-  let msg=`*MUSTOWN UBER - NEW*%0A%0A*Name:* ${n}%0A*Phone:* ${ph}%0A*From:* ${pk}%0A*To:* ${ds}%0A*Pass:* ${ps}%0A*Notes:* ${nt}%0A*PRICE: NEGOTIABLE*`;
-  window.open(`https://wa.me/27799073779?text=${msg}`,'_blank');
-  setTimeout(()=>{window.open(`https://wa.me/27725660255?text=${msg}`,'_blank');},800);
+  let rideId=null;
+  try{ if(window.saveRide){ rideId=await window.saveRide(data); } }catch(e){}
+  if(rideId){ myRideId=rideId; localStorage.setItem('mustown_lastRide', rideId); }
+  document.getElementById('mu-tracking').style.display='block';
+  document.getElementById('mu-trackTitle').innerText='📡 RIDE SENT! WAITING FOR DRIVER...';
+  document.getElementById('mu-trackText').innerText=`${pk} → ${ds} • Sent to BOTH numbers. Driver will ACCEPT in app. Keep this page open.`;
+  let msg=`*MUSTOWN UBER - NEW RIDE*%0A%0A*Name:* ${encodeURIComponent(n)}%0A*Phone:* ${encodeURIComponent(ph)}%0A*From:* ${encodeURIComponent(pk)}%0A*To:* ${encodeURIComponent(ds)}%0A*Pass:* ${ps}%0A*Notes:* ${encodeURIComponent(nt)}%0A*PRICE: NEGOTIABLE*`;
+  document.getElementById('mu-trackBtns').innerHTML=`<a href="https://wa.me/27725660255?text=${msg}" target="_blank"><button class="btn btn-green" style="padding:10px">💬 SEND TO 0725660255</button></a><a href="https://wa.me/27763584601?text=${msg}" target="_blank"><button class="btn btn-dark" style="padding:10px">💬 SEND TO 0763584601</button></a>`;
+  window.open(`https://wa.me/27725660255?text=${msg}`,'_blank');
+  document.getElementById('mu-tracking').scrollIntoView({behavior:'smooth'});
 }
-function driverLogin(){
-  let name=document.getElementById('mu-driverName').value.trim()||"ROMEO";
-  currentDriver={name:name};
+function updateTracking(ride){
+  if(!myRideId || ride.id!==myRideId) return;
+  let box=document.getElementById('mu-tracking'); box.style.display='block';
+  if(ride.status==='Pending'){ document.getElementById('mu-trackTitle').innerText='📡 WAITING FOR DRIVER...'; document.getElementById('mu-trackText').innerText='Driver has NOT accepted yet. Wait, alert is ringing on driver phone.'; }
+  else if(ride.status && ride.status.indexOf('Accepted')===0){ document.getElementById('mu-trackTitle').innerText='✅ DRIVER ACCEPTED! ON THE WAY!'; document.getElementById('mu-trackText').innerText=ride.status+' • Driver is coming to '+ride.pickup; if(navigator.vibrate) navigator.vibrate([400,100,400]); }
+  else if(ride.status==='Completed'){ document.getElementById('mu-trackTitle').innerText='🏁 TRIP DONE - THANK YOU!'; document.getElementById('mu-trackText').innerText='Rate us on WhatsApp please!'; }
+  else { document.getElementById('mu-trackTitle').innerText='📡 STATUS: '+ride.status; }
+}
+async function driverLogin(){
+  let name=(document.getElementById('mu-driverName').value.trim()||"ROMEO").toUpperCase();
+  let phone=document.getElementById('mu-driverPhone').value.trim()||"0763584601";
+  currentDriver={name:name, phone:phone}; window.currentDriverName=name;
   document.getElementById('driverDashboard').style.display='block';
   document.getElementById('loggedDriverName').innerText='Welcome: '+name+' - Alerts ON';
-  document.getElementById('loggedDriverStatus').innerText='Status: Available';
-  if(Notification && Notification.permission!=="granted") Notification.requestPermission();
+  document.getElementById('loggedDriverStatus').innerText='Status: Available - SAVED LIVE';
+  try{ if(window.saveDriver) await window.saveDriver(name, phone, 'Available'); }catch(e){}
+  if(window.Notification && Notification.permission!=="granted") Notification.requestPermission();
   testAlert();
 }
-function setDriverStatus(s){ if(!currentDriver) return; document.getElementById('loggedDriverStatus').innerText='Status: '+s; if(window.updateDriverStatus) window.updateDriverStatus(currentDriver.name,s); }
+async function setDriverStatus(s){ if(!currentDriver) return; document.getElementById('loggedDriverStatus').innerText='Status: '+s+' - SAVED LIVE'; try{ if(window.updateDriverStatus) await window.updateDriverStatus(currentDriver.name,s,currentDriver.phone); }catch(e){} }
 function testAlert(){
   const a=document.getElementById('alertBox'); a.style.display='block'; a.innerHTML='🔔 Alert Working! ROMEO spinning below!';
   document.getElementById('notifySound').play().catch(()=>{});
@@ -156,61 +174,76 @@ function testAlert(){
   setTimeout(()=>{a.style.display='none';},3500);
 }
 function triggerDriverAlert(ride){
-  if(isFirstLoad) return; if(!currentDriver) return;
+  if(isFirstLoad) return;
   const a=document.getElementById('alertBox');
   a.innerHTML=`🚕 NEW RIDE! ${ride.name}<br>${ride.pickup} → ${ride.destination}<br>📞 ${ride.phone}`;
   a.style.display='block';
   document.getElementById('notifySound').play().catch(()=>{});
   if(navigator.vibrate) navigator.vibrate([500,200,500,200,800]);
-  if(Notification && Notification.permission==="granted"){ new Notification("MUSTOWN UBER - New Ride!", {body:`${ride.name}: ${ride.pickup} → ${ride.destination}`, icon:"logo.png"}); }
+  if(window.Notification && Notification.permission==="granted"){ new Notification("MUSTOWN UBER - New Ride!", {body:`${ride.name}: ${ride.pickup} → ${ride.destination}`, icon:"logo.png"}); }
   setTimeout(()=>{a.style.display='none';},8000);
 }
+function cleanPhone(p){ p=(p||'').replace(/\D/g,''); if(p.length===10 && p.charAt(0)==='0') p=p.slice(1); if(p.length===9) p='27'+p; return p; }
 </script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, onSnapshot, addDoc, doc, updateDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, collection, onSnapshot, addDoc, doc, updateDoc, query, where, getDocs, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 const firebaseConfig = { apiKey: "AIzaSyAxr3YY5JBhy_IZ-E6Q9wagGxPSSb1POAg", authDomain: "mtown-07790.firebaseapp.com", projectId: "mtown-07790", storageBucket: "mtown-07790.firebasestorage.app", messagingSenderId: "421618677628", appId: "1:421618677628:web:ce910417eb09410dcbd6f9", measurementId: "G-9KTX5J8G65" };
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-window.saveRide = async (data)=>{ try{ await addDoc(collection(db,"rides"), data);}catch(e){} }
-window.updateDriverStatus = async (name,status)=>{
+window.saveRide = async (data)=>{ try{ const r=await addDoc(collection(db,"rides"), data); return r.id; }catch(e){ return null; } }
+window.saveDriver = async (name, phone, status)=>{
   try{
     const q=query(collection(db,"drivers"), where("name","==",name));
     const snap=await getDocs(q);
-    if(snap.empty){ await addDoc(collection(db,"drivers"), {name, status, phone:""}); }
+    if(snap.empty){ await addDoc(collection(db,"drivers"), {name, phone, status, car:"Toyota Rumion", plate:"", photo:"logo.png", createdAt:new Date().toISOString()}); }
+    else snap.forEach(async d=>{ await updateDoc(doc(db,"drivers",d.id), {status, phone}); });
+  }catch(e){}
+}
+window.updateDriverStatus = async (name,status,phone)=>{
+  try{
+    const q=query(collection(db,"drivers"), where("name","==",name));
+    const snap=await getDocs(q);
+    if(snap.empty){ await addDoc(collection(db,"drivers"), {name, status, phone:phone||"", photo:"logo.png"}); }
     else snap.forEach(async d=>{ await updateDoc(doc(db,"drivers",d.id), {status}); });
   }catch(e){}
 }
 window.addDriver = async ()=>{
-  let name=document.getElementById('ad-name').value.trim(), phone=document.getElementById('ad-phone').value.trim(), car=document.getElementById('ad-car').value.trim(), plate=document.getElementById('ad-plate').value.trim(), status=document.getElementById('ad-status').value, photo=document.getElementById('ad-photo').value.trim()||"logo.png";
+  let name=document.getElementById('ad-name').value.trim().toUpperCase(), phone=document.getElementById('ad-phone').value.trim(), car=document.getElementById('ad-car').value.trim(), plate=document.getElementById('ad-plate').value.trim(), status=document.getElementById('ad-status').value, photo=document.getElementById('ad-photo').value.trim()||"logo.png";
   if(!name||!phone){alert('Name+Phone required');return}
   await addDoc(collection(db,"drivers"), {name, phone, car, plate, status, photo, createdAt:new Date().toISOString()});
   alert(name+' added ✅');
 }
 onSnapshot(collection(db,"drivers"), (snap)=>{
-  document.getElementById("mu-debug").innerText="✅ LIVE: "+snap.size+" drivers - Logo Fixed, ROMEO Spinning Below";
+  document.getElementById("mu-debug").innerText="✅ LIVE: "+snap.size+" drivers";
   let html="";
   snap.forEach(d=>{
     let dd=d.data();
-    let isRomeo=dd.name.toLowerCase().includes('romeo');
+    let isRomeo=(dd.name||'').toLowerCase().includes('romeo');
     let sc=dd.status=='Available'?'s-available':dd.status=='On Trip'?'s-busy':'s-offline';
-    html+=`<div class="driver"><img class="${isRomeo?'romeo':''}" src="${dd.photo||'logo.png'}"><div><b>🚗 ${dd.name} ${isRomeo?'🔄':''}</b><br>📞 ${dd.phone}<br>${dd.car||''} ${dd.plate||''}<br><span class="status ${sc}">● ${dd.status||'Available'}</span></div></div>`;
+    html+=`<div class="driver"><img class="${isRomeo?'romeo':''}" src="${dd.photo||'logo.png'}" onerror="this.src='logo.png'"><div><b>🚗 ${dd.name} ${isRomeo?'🔄':''}</b><br>📞 ${dd.phone||''}<br>${dd.car||''} ${dd.plate||''}<br><span class="status ${sc}">● ${dd.status||'Available'}</span></div></div>`;
   });
   if(snap.empty){
-    html=`<div class="driver"><img class="romeo" src="logo.png"><div><b>🚗 ROMEO 🔄</b><br>📞 0763584601<br>Toyota Rumion - 2264 L<br><span class="status s-available">● Available - Spinning</span></div></div><div class="driver"><img src="logo.png"><div><b>🚗 DAVIS</b><br>📞 0763584601<br>Not spinning<br><span class="status s-available">● Available</span></div></div>`;
+    html=`<div class="driver"><img class="romeo" src="logo.png" onerror="this.src='logo.png'"><div><b>🚗 ROMEO 🔄</b><br>📞 0763584601<br>Toyota Rumion - 2264 L<br><span class="status s-available">● Available - Spinning</span></div></div>`;
   }
   document.getElementById("mu-drivers").innerHTML=html;
-});
+}, (err)=>{ document.getElementById("mu-debug").innerText="⚠️ OFFLINE: Check internet / Firebase rules - "+err.code; });
 onSnapshot(collection(db,"rides"), (snap)=>{
   let rides=[]; snap.forEach(d=>{rides.push({id:d.id,...d.data()})}); rides.sort((a,b)=> new Date(b.createdAt)-new Date(a.createdAt));
   if(!isFirstLoad && rides.length>lastRideCount){ let nr=rides[0]; if(typeof triggerDriverAlert==='function') triggerDriverAlert(nr); }
   lastRideCount=rides.length; isFirstLoad=false;
-  let html=rides.slice(0,10).map(r=>`<div class="rideCard"><b>${r.name}</b> (${r.phone})<br>📍 ${r.pickup} → ${r.destination}<br>👥 ${r.passengers} • <b>${r.price}</b> • ${r.status}<br><small>${new Date(r.createdAt).toLocaleString()}</small></div>`).join('');
-  document.getElementById('mu-rides').innerHTML=html||'No rides';
-  document.getElementById('allRidesAdmin').innerHTML=html||'No rides';
-  document.getElementById('driverRides').innerHTML = rides.filter(r=>r.status==='Pending').slice(0,5).map(r=>`<div class="rideCard"><b>NEW:</b> ${r.name} - ${r.pickup} → ${r.destination}<br>${r.price} • ${r.phone}<br><div style="display:flex;gap:6px;margin-top:6px"><button class="btn btn-green" style="padding:8px;font-size:12px" onclick="acceptRide('${r.id}')">✅ ACCEPT</button><a href="https://wa.me/27${r.phone?.slice(-9)}" target="_blank" style="flex:1"><button class="btn btn-dark" style="padding:8px;font-size:12px;width:100%">CALL</button></a></div></div>`).join('') || 'No pending';
-});
-window.acceptRide = async (id)=>{ try{ await updateDoc(doc(db,"rides",id), {status:"Accepted by "+(currentDriver?.name||'Driver'), acceptedAt:new Date().toISOString()}); alert('Accepted ✅'); }catch(e){alert(e.message)} }
+  rides.forEach(r=>{ if(typeof updateTracking==='function') updateTracking(r); });
+  let html=rides.slice(0,10).map(r=>`<div class="rideCard"><b>${r.name}</b> (${r.phone})<br>📍 ${r.pickup} → ${r.destination}<br>👥 ${r.passengers} • <b>${r.price}</b> • ${r.status}<br><small>${r.createdAt?new Date(r.createdAt).toLocaleString():''}</small></div>`).join('');
+  document.getElementById('mu-rides').innerHTML=html||'No rides yet';
+  document.getElementById('allRidesAdmin').innerHTML=html||'No rides yet';
+  let dr=document.getElementById('driverRides');
+  if(dr) dr.innerHTML = rides.filter(r=>r.status==='Pending').slice(0,5).map(r=>`<div class="rideCard"><b>NEW:</b> ${r.name} - ${r.pickup} → ${r.destination}<br>${r.price} • ${r.phone}<br><div style="display:flex;gap:6px;margin-top:6px"><button class="btn btn-green" style="padding:8px;font-size:12px" onclick="acceptRide('${r.id}')">✅ ACCEPT</button><a href="https://wa.me/${cleanPhoneJS(r.phone)}" target="_blank" style="flex:1"><button class="btn btn-dark" style="padding:8px;font-size:12px;width:100%">CALL CUSTOMER</button></a></div></div>`).join('') || 'No pending rides. Wait for alert 🔔';
+  let acc=rides.filter(r=>r.status && r.status.indexOf('Accepted')===0).slice(0,5).map(r=>`<div class="rideCard"><b>ON TRIP:</b> ${r.name} - ${r.pickup} → ${r.destination}<br><button class="btn btn-dark" style="padding:8px;font-size:12px" onclick="completeRide('${r.id}')">🏁 COMPLETE TRIP</button></div>`).join('');
+  if(dr && acc) dr.innerHTML+=acc;
+}, (err)=>{ document.getElementById('mu-rides').innerHTML='⚠️ Cannot load rides: '+err.code+' - Check Firebase Rules'; });
+function cleanPhoneJS(p){ p=(p||'').replace(/\D/g,''); if(p.length===10&&p.charAt(0)==='0') p=p.slice(1); if(p.length===9) p='27'+p; return p; }
+window.acceptRide = async (id)=>{ try{ let n=window.currentDriverName||'Driver'; await updateDoc(doc(db,"rides",id), {status:"Accepted by "+n, acceptedAt:new Date().toISOString()}); alert('Accepted ✅ Customer now sees YOU ARE COMING!'); try{ await window.updateDriverStatus(n,'On Trip'); }catch(e){} }catch(e){alert(e.message)} }
+window.completeRide = async (id)=>{ try{ await updateDoc(doc(db,"rides",id), {status:"Completed"}); alert('Trip Completed 🏁'); }catch(e){alert(e.message)} }
 </script>
 </body>
 </html>
